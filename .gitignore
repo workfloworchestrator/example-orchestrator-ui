@@ -18,6 +18,8 @@
 # misc
 .DS_Store
 *.pem
+.idea
+.turbo
 
 # debug
 npm-debug.log*
