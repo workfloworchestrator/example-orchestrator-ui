@@ -1,0 +1,45 @@
+$ next build
+   Linting and checking validity of types ...
+   ▲ Next.js 14.0.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Collecting page data ...
+Warning: You have opted-out of Automatic Static Optimization due to `getInitialProps` in `pages/_app`. This does not opt-out pages with `getStaticProps`
+Read more: https://nextjs.org/docs/messages/opt-out-auto-static-optimization
+
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (pages)                              Size     First Load JS
+┌ λ /                                      455 B          1.13 MB
+├   /_app                                  0 B            1.13 MB
+├ λ /404                                   188 B          1.13 MB
+├ λ /api/auth/[...nextauth]                0 B            1.13 MB
+├ λ /forms                                 407 B          1.13 MB
+├ λ /metadata/productblocks                298 B          1.13 MB
+├ λ /metadata/products                     290 B          1.13 MB
+├ λ /metadata/resource-types               299 B          1.13 MB
+├ λ /metadata/workflows                    293 B          1.13 MB
+├ λ /settings                              282 B          1.13 MB
+├ λ /subscriptions                         275 B          1.13 MB
+├ λ /subscriptions/[subscriptionId]        271 B          1.13 MB
+├ λ /tasks                                 281 B          1.13 MB
+├ λ /tasks/[taskId]                        357 B          1.13 MB
+├ λ /tasks/new                             292 B          1.13 MB
+├ λ /tasks/new/[taskName]                  375 B          1.13 MB
+├ λ /workflows                             273 B          1.13 MB
+├ λ /workflows/[workflowId]                363 B          1.13 MB
+├ λ /workflows/new                         297 B          1.13 MB
+└ λ /workflows/new/[workflowName]          380 B          1.13 MB
++ First Load JS shared by all              1.15 MB
+  ├ chunks/framework-0a00898b205e7282.js   45.2 kB
+  ├ chunks/main-db4736459c6d2522.js        32.5 kB
+  ├ chunks/pages/_app-d62e40ac522ab56a.js  1.04 MB
+  ├ chunks/webpack-54f391d4b836d633.js     13.1 kB
+  └ css/b77486c34e98a5e4.css               22.7 kB
+
+ƒ Middleware                               39.4 kB
+
+λ  (Dynamic)  server-rendered on demand using Node.js
+
