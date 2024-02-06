@@ -54,7 +54,10 @@ function CustomApp({
             <OrchestratorConfigProvider
                 initialOrchestratorConfig={orchestratorConfig}
             >
-                <StoreProvider initialOrchestratorConfig={orchestratorConfig}>
+                <StoreProvider
+                    initialOrchestratorConfig={orchestratorConfig}
+                    session={pageProps.session}
+                >
                     <SessionProvider session={pageProps.session}>
                         <NoSSR>
                             <WfoAuth>
