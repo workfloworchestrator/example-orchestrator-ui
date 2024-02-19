@@ -8,6 +8,7 @@ import {
 export const DEFAULT_GRAPHQL_CORE_ENDPOINT =
     'http://localhost:8080/api/graphql';
 export const DEFAULT_ORCHESTRATOR_API_BASE_URL = 'http://localhost:8080/api';
+export const DEFAULT_ORCHESTRATOR_WEBSOCKET_URL = 'ws://localhost:8080';
 
 export const ENGINE_STATUS_ENDPOINT = '/settings/status';
 export const PROCESS_STATUS_COUNTS_ENDPOINT = '/processes/status-counts';
@@ -41,6 +42,9 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
             orchestratorApiBaseUrl + SUBSCRIPTION_ACTIONS_ENDPOINT,
         subscriptionProcessesEndpoint:
             orchestratorApiBaseUrl + SUBSCRIPTION_PROCESSES_ENDPOINT,
+        orchestratorWebsocketUrl:
+            process.env.ORCHESTRATOR_WEBSOCKET_URL ||
+            DEFAULT_ORCHESTRATOR_WEBSOCKET_URL,
         authActive: process.env.AUTH_ACTIVE?.toLowerCase() != 'false',
     };
 };
