@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NoSSR from 'react-no-ssr';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -10,10 +10,12 @@ import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import Head from 'next/head';
 import { QueryParamProvider } from 'use-query-params';
 
-import { EuiProvider } from '@elastic/eui';
+import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
+import '@elastic/eui/dist/eui_theme_dark.min.css';
 import '@elastic/eui/dist/eui_theme_light.min.css';
 import {
     ApiClientContextProvider,
+    ColorModes,
     ConfirmationDialogContextWrapper,
     OrchestratorConfig,
     OrchestratorConfigProvider,
@@ -49,6 +51,27 @@ function CustomApp({
 }: AppProps & AppOwnProps) {
     const [queryClient] = useState(() => new QueryClient(queryClientConfig));
 
+    const [themeMode, setThemeMode] = useState<EuiThemeColorMode>(
+        ColorModes.LIGHT,
+    );
+
+    const handleThemeSwitch = (newThemeMode: EuiThemeColorMode) => {
+        setThemeMode(newThemeMode);
+        localStorage.setItem('themeMode', newThemeMode);
+    };
+
+    useEffect(() => {
+        // Initialize theme mode from localStorage or set it to 'light' if not present
+        const storedTheme = localStorage.getItem('themeMode');
+        if (
+            !storedTheme ||
+            (storedTheme !== ColorModes.LIGHT &&
+                storedTheme !== ColorModes.DARK)
+        ) {
+            handleThemeSwitch(ColorModes.LIGHT);
+        }
+    }, []);
+
     return (
         <WfoErrorBoundary>
             <OrchestratorConfigProvider
@@ -59,7 +82,7 @@ function CustomApp({
                         <NoSSR>
                             <WfoAuth>
                                 <EuiProvider
-                                    colorMode="light"
+                                    colorMode={themeMode}
                                     modify={defaultOrchestratorTheme}
                                 >
                                     <ApiClientContextProvider>
@@ -83,6 +106,9 @@ function CustomApp({
                                                         <WfoPageTemplate
                                                             getAppLogo={
                                                                 getAppLogo
+                                                            }
+                                                            onThemeSwitch={
+                                                                handleThemeSwitch
                                                             }
                                                         >
                                                             <QueryParamProvider
