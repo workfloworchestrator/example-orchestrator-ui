@@ -1,7 +1,17 @@
 import React from 'react';
 
-import { WfoSubscriptionsListPage } from '@orchestrator-ui/orchestrator-ui-components';
+import {
+    PolicyResource,
+    WfoPolicyRenderPageFallback,
+    WfoSubscriptionsListPage,
+} from '@orchestrator-ui/orchestrator-ui-components';
 
 export default function SubscriptionsPage() {
-    return <WfoSubscriptionsListPage />;
+    return (
+        <WfoPolicyRenderPageFallback
+            resource={PolicyResource.NAVIGATION_SUBSCRIPTIONS}
+        >
+            <WfoSubscriptionsListPage />
+        </WfoPolicyRenderPageFallback>
+    );
 }
