@@ -1,9 +1,17 @@
 import React from 'react';
 
-import { WfoTasksListPage } from '@orchestrator-ui/orchestrator-ui-components';
+import {
+    PolicyResource,
+    WfoPolicyRenderPageFallback,
+    WfoTasksListPage,
+} from '@orchestrator-ui/orchestrator-ui-components';
 
 export function TasksPage() {
-    return <WfoTasksListPage />;
+    return (
+        <WfoPolicyRenderPageFallback resource={PolicyResource.NAVIGATION_TASKS}>
+            <WfoTasksListPage />
+        </WfoPolicyRenderPageFallback>
+    );
 }
 
 export default TasksPage;
