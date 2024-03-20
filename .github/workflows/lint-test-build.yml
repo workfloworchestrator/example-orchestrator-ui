@@ -15,7 +15,7 @@ jobs:
                   path: "**/node_modules"
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/package.json') }}
             - name: Installing dependencies
-              run: npm ci
+              run: npm i
 
     tsc-and-linting:
         runs-on: ubuntu-latest
@@ -32,7 +32,7 @@ jobs:
                   path: "**/node_modules"
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/package.json') }}
             - name: Installing dependencies
-              run: npm ci
+              run: npm i
             - run: npm run tsc
             - run: npm run lint
 
@@ -51,7 +51,7 @@ jobs:
                   path: "**/node_modules"
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/package.json') }}
             - name: Installing dependencies
-              run: npm ci
+              run: npm i
             - run: npm run test
 
     build:
@@ -69,5 +69,5 @@ jobs:
                   path: "**/node_modules"
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/package.json') }}
             - name: Installing dependencies
-              run: npm ci
+              run: npm i
             - run: npm run build
