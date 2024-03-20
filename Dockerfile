@@ -4,8 +4,9 @@ FROM node:18-alpine AS builder
 
 WORKDIR /build
 COPY . .
-RUN yarn install
-RUN yarn build --no-lint
+RUN npm install && npm update @orchestrator-ui/orchestrator-ui-components && npm update @orchestrator-ui/eslint-config-custom && npm update @orchestrator-ui/jest-config && npm update @orchestrator-ui/tsconfig
+RUN npm run build
+
 
 FROM node:18-alpine AS runner
 
@@ -16,4 +17,6 @@ COPY --chown=node --from=builder /build .
 
 USER node
 EXPOSE 3000
-CMD yarn start
+CMD npm start
+
+
