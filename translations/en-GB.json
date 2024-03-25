@@ -22,5 +22,31 @@
             "active": "Started",
             "completed": "Stopped"
         }
+    },
+    "configurations": {
+        "fixedVersionTypes": {
+            "resourceId": "Fixed version ID",
+            "type": "Fixed version type",
+            "description": "Description",
+            "usedInProductBlocks": "Used where"
+        },
+        "productBlocks": {
+            "id": "ID",
+            "name": "Name",
+            "tag": "Tag",
+            "description": "Description",
+            "status": "Status",
+            "dependingProductBlocks": "Depends on",
+            "resourceTypes": "Fixed inputs"
+        }
+    },
+    "metadata": {
+        "title": "Configurations",
+        "tabs": {
+            "fixedVersionTypes": "Fixed version types",
+            "products": "Products",
+            "productBlocks": "Product blocks",
+            "routines": "Routines"
+        }
     }
 }
