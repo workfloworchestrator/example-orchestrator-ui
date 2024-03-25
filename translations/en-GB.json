@@ -10,5 +10,9 @@
         },
 
         "loadingStatus": "Loading status"
-    }
+    },
+    "jobsList": {
+        "rerunAll": "Rerun all jobs",
+        "rerunAllQuestion": "Sure?",
+        "jobName": "Job name"    }
 }
