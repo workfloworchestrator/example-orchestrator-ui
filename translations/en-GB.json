@@ -1,1 +1,14 @@
-{}
+{
+    "notifications": {
+        "title": "Notifications",
+
+        "tabs": {
+            "active": "Active",
+            "terminated": "Tab 2",
+            "transient": "Tab 3",
+            "all": "All"
+        },
+
+        "loadingStatus": "Loading status"
+    }
+}
