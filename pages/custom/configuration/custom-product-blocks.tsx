@@ -47,20 +47,15 @@ import { WfoMetadataPageLayout } from '@orchestrator-ui/orchestrator-ui-componen
 
 import { configurationTabs } from './configurationTabs';
 
-const PRODUCT_BLOCK_FIELD_ID: keyof ProductBlockDefinition = 'productBlockId';
-const PRODUCT_BLOCK_FIELD_NAME: keyof ProductBlockDefinition = 'name';
-
-const PRODUCT_BLOCK_FIELD_TAG: keyof ProductBlockDefinition = 'tag';
-const PRODUCT_BLOCK_FIELD_DESCRIPTION: keyof ProductBlockDefinition =
-    'description';
-const PRODUCT_BLOCK_FIELD_STATUS: keyof ProductBlockDefinition = 'status';
-const PRODUCT_BLOCK_FIELD_CREATED_AT: keyof ProductBlockDefinition =
-    'createdAt';
-const PRODUCT_BLOCK_FIELD_END_DATE: keyof ProductBlockDefinition = 'endDate';
-const PRODUCT_BLOCK_FIELD_RESOURCE_TYPES: keyof ProductBlockDefinition =
-    'resourceTypes';
-const PRODUCT_BLOCK_FIELD_PRODUCT_BLOCKS: keyof ProductBlockDefinition =
-    'dependsOn';
+const PRODUCT_BLOCK_FIELD_ID = 'productBlockId';
+const PRODUCT_BLOCK_FIELD_NAME = 'name';
+const PRODUCT_BLOCK_FIELD_TAG = 'tag';
+const PRODUCT_BLOCK_FIELD_DESCRIPTION = 'description';
+const PRODUCT_BLOCK_FIELD_STATUS = 'status';
+const PRODUCT_BLOCK_FIELD_CREATED_AT = 'createdAt';
+const PRODUCT_BLOCK_FIELD_END_DATE = 'endDate';
+const PRODUCT_BLOCK_FIELD_RESOURCE_TYPES = 'resourceTypes';
+const PRODUCT_BLOCK_FIELD_PRODUCT_BLOCKS = 'dependsOn';
 
 export default function WfoProductBlocksPage() {
     const t = useTranslations('configurations.productBlocks');

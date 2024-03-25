@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClientConfig } from 'react-query/types/core/types';
 
-import { get } from 'http';
 import { SessionProvider } from 'next-auth/react';
 import { NextAdapter } from 'next-query-params';
 import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
