@@ -14,5 +14,13 @@
     "jobsList": {
         "rerunAll": "Rerun all jobs",
         "rerunAllQuestion": "Sure?",
-        "jobName": "Job name"    }
+        "jobName": "Job name"
+    },
+    "routines": {
+        "title": "Routines",
+        "tabs": {
+            "active": "Started",
+            "completed": "Stopped"
+        }
+    }
 }
