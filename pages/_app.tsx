@@ -4,12 +4,15 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClientConfig } from 'react-query/types/core/types';
 
+import { get } from 'http';
 import { SessionProvider } from 'next-auth/react';
 import { NextAdapter } from 'next-query-params';
 import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { QueryParamProvider } from 'use-query-params';
 
+import type { EuiSideNavItemType } from '@elastic/eui';
 import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
 import '@elastic/eui/dist/eui_theme_dark.min.css';
 import '@elastic/eui/dist/eui_theme_light.min.css';
@@ -49,6 +52,7 @@ function CustomApp({
     pageProps,
     orchestratorConfig,
 }: AppProps & AppOwnProps) {
+    const router = useRouter();
     const [queryClient] = useState(() => new QueryClient(queryClientConfig));
 
     const [themeMode, setThemeMode] = useState<EuiThemeColorMode>(
@@ -71,6 +75,33 @@ function CustomApp({
             handleThemeSwitch(ColorModes.LIGHT);
         }
     }, []);
+
+    const getMenuItems = (
+        defaultMenuItems: EuiSideNavItemType<object>[],
+    ): EuiSideNavItemType<object>[] => {
+        const subscriptionsMenuItemIndex = defaultMenuItems.findIndex(
+            (menuItem) => menuItem.id === '4',
+        );
+
+        const notificationsMenuItem = {
+            name: 'Notifications',
+            id: '4',
+            isSelected: router.pathname === '/custom/notifications',
+            href: '/custom/notifications',
+            onClick: (e) => {
+                e.preventDefault();
+                router.push('/custom/notifications');
+            },
+        };
+
+        defaultMenuItems.splice(
+            subscriptionsMenuItemIndex,
+            1,
+            notificationsMenuItem,
+        );
+
+        return defaultMenuItems;
+    };
 
     return (
         <WfoErrorBoundary>
@@ -109,6 +140,9 @@ function CustomApp({
                                                             }
                                                             onThemeSwitch={
                                                                 handleThemeSwitch
+                                                            }
+                                                            overrideMenuItems={
+                                                                getMenuItems
                                                             }
                                                         >
                                                             <QueryParamProvider
