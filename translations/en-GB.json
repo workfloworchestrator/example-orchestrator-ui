@@ -38,6 +38,24 @@
             "status": "Status",
             "dependingProductBlocks": "Depends on",
             "resourceTypes": "Fixed inputs"
+        },
+        "products": {
+            "id": "ID",
+            "name": "Name",
+            "tag": "Tag",
+            "description": "Description",
+            "productType": "Product type",
+            "status": "Status",
+            "fixedInputs": "Fixed inputs",
+            "productBlocks": "Product blocks",
+            "createdAt": "Created at"
+        },
+        "routines": {
+            "name": "Routine",
+            "description": "Description",
+            "target": "Goal",
+            "createdAt": "Created at",
+            "productTags": "Product tags"
         }
     },
     "metadata": {
