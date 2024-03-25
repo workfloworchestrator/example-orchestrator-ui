@@ -76,31 +76,122 @@ function CustomApp({
         }
     }, []);
 
-    const getMenuItems = (
-        defaultMenuItems: EuiSideNavItemType<object>[],
-    ): EuiSideNavItemType<object>[] => {
-        const subscriptionsMenuItemIndex = defaultMenuItems.findIndex(
-            (menuItem) => menuItem.id === '4',
-        );
-
-        const notificationsMenuItem = {
-            name: 'Notifications',
-            id: '4',
-            isSelected: router.pathname === '/custom/notifications',
-            href: '/custom/notifications',
-            onClick: (e) => {
-                e.preventDefault();
-                router.push('/custom/notifications');
+    const getMenuItems = (): EuiSideNavItemType<object>[] => {
+        return [
+            {
+                name: 'Start',
+                id: '2',
+                isSelected: router.pathname === '/',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/');
+                },
             },
-        };
-
-        defaultMenuItems.splice(
-            subscriptionsMenuItemIndex,
-            1,
-            notificationsMenuItem,
-        );
-
-        return defaultMenuItems;
+            {
+                name: 'Routines',
+                id: '3',
+                isSelected: router.pathname === '/custom/routines',
+                href: '/custom/routines',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/custom/routines');
+                },
+            },
+            {
+                name: 'Notifications',
+                id: '4',
+                isSelected: router.pathname === '/custom/notifications',
+                href: '/custom/notifications',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/custom/notifications');
+                },
+            },
+            {
+                name: 'Configuration',
+                id: '5',
+                href: '/custom/configuration/custom-fixed-version-types',
+                onClick: () => {
+                    router.push(
+                        '/custom/configuration/custom-fixed-version-types',
+                    );
+                },
+                items: [
+                    {
+                        name: 'Fixed Version Types',
+                        id: '5.1',
+                        isSelected:
+                            router.pathname ===
+                            '/custom/configuration/custom-fixed-version-types',
+                        onClick: (e) => {
+                            e.preventDefault();
+                            router.push(
+                                '/custom/configuration/custom-fixed-version-types',
+                            );
+                        },
+                    },
+                    {
+                        name: 'Product blocks',
+                        id: '5.2',
+                        isSelected:
+                            router.pathname ===
+                            '/custom/configuration/custom-product-blocks',
+                        onClick: (e) => {
+                            e.preventDefault();
+                            router.push(
+                                '/custom/configuration/custom-product-blocks',
+                            );
+                        },
+                    },
+                    {
+                        name: 'Products',
+                        id: '5.3',
+                        isSelected:
+                            router.pathname ===
+                            '/custom/configuration/custom-products',
+                        onClick: (e) => {
+                            e.preventDefault();
+                            router.push(
+                                '/custom/configuration/custom-products',
+                            );
+                        },
+                    },
+                    {
+                        name: 'Routines',
+                        id: '5.4',
+                        isSelected:
+                            router.pathname ===
+                            '/custom/configuration/custom-routines',
+                        onClick: (e) => {
+                            e.preventDefault();
+                            router.push(
+                                '/custom/configuration/custom-routines',
+                            );
+                        },
+                    },
+                ],
+            },
+            {
+                name: 'Jobs',
+                isSelected: router.pathname === '/custom/jobs',
+                id: '6',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/custom/jobs');
+                },
+                href: '/custom/jobs',
+            },
+            {
+                name: 'Settings',
+                isSelected: router.pathname === '/custom/custom-settings',
+                id: '7',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/custom/custom-settings');
+                },
+                href: '/custom/custom-settings',
+            },
+        ];
     };
 
     return (
