@@ -8,8 +8,10 @@ import { SessionProvider } from 'next-auth/react';
 import { NextAdapter } from 'next-query-params';
 import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { QueryParamProvider } from 'use-query-params';
 
+import type { EuiSideNavItemType } from '@elastic/eui';
 import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
 import '@elastic/eui/dist/eui_theme_dark.min.css';
 import '@elastic/eui/dist/eui_theme_light.min.css';
@@ -49,6 +51,7 @@ function CustomApp({
     pageProps,
     orchestratorConfig,
 }: AppProps & AppOwnProps) {
+    const router = useRouter();
     const [queryClient] = useState(() => new QueryClient(queryClientConfig));
 
     const [themeMode, setThemeMode] = useState<EuiThemeColorMode>(
@@ -71,6 +74,124 @@ function CustomApp({
             handleThemeSwitch(ColorModes.LIGHT);
         }
     }, []);
+
+    const getMenuItems = (): EuiSideNavItemType<object>[] => {
+        return [
+            {
+                name: 'Start',
+                id: '2',
+                isSelected: router.pathname === '/',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/');
+                },
+            },
+            {
+                name: 'Routines',
+                id: '3',
+                isSelected: router.pathname === '/custom/routines',
+                href: '/custom/routines',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/custom/routines');
+                },
+            },
+            {
+                name: 'Notifications',
+                id: '4',
+                isSelected: router.pathname === '/custom/notifications',
+                href: '/custom/notifications',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/custom/notifications');
+                },
+            },
+            {
+                name: 'Configuration',
+                id: '5',
+                href: '/custom/configuration/custom-fixed-version-types',
+                onClick: () => {
+                    router.push(
+                        '/custom/configuration/custom-fixed-version-types',
+                    );
+                },
+                items: [
+                    {
+                        name: 'Fixed Version Types',
+                        id: '5.1',
+                        isSelected:
+                            router.pathname ===
+                            '/custom/configuration/custom-fixed-version-types',
+                        onClick: (e) => {
+                            e.preventDefault();
+                            router.push(
+                                '/custom/configuration/custom-fixed-version-types',
+                            );
+                        },
+                    },
+                    {
+                        name: 'Product blocks',
+                        id: '5.2',
+                        isSelected:
+                            router.pathname ===
+                            '/custom/configuration/custom-product-blocks',
+                        onClick: (e) => {
+                            e.preventDefault();
+                            router.push(
+                                '/custom/configuration/custom-product-blocks',
+                            );
+                        },
+                    },
+                    {
+                        name: 'Products',
+                        id: '5.3',
+                        isSelected:
+                            router.pathname ===
+                            '/custom/configuration/custom-products',
+                        onClick: (e) => {
+                            e.preventDefault();
+                            router.push(
+                                '/custom/configuration/custom-products',
+                            );
+                        },
+                    },
+                    {
+                        name: 'Routines',
+                        id: '5.4',
+                        isSelected:
+                            router.pathname ===
+                            '/custom/configuration/custom-routines',
+                        onClick: (e) => {
+                            e.preventDefault();
+                            router.push(
+                                '/custom/configuration/custom-routines',
+                            );
+                        },
+                    },
+                ],
+            },
+            {
+                name: 'Jobs',
+                isSelected: router.pathname === '/custom/jobs',
+                id: '6',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/custom/jobs');
+                },
+                href: '/custom/jobs',
+            },
+            {
+                name: 'Settings',
+                isSelected: router.pathname === '/custom/custom-settings',
+                id: '7',
+                onClick: (e) => {
+                    e.preventDefault();
+                    router.push('/custom/custom-settings');
+                },
+                href: '/custom/custom-settings',
+            },
+        ];
+    };
 
     return (
         <WfoErrorBoundary>
@@ -109,6 +230,9 @@ function CustomApp({
                                                             }
                                                             onThemeSwitch={
                                                                 handleThemeSwitch
+                                                            }
+                                                            overrideMenuItems={
+                                                                getMenuItems
                                                             }
                                                         >
                                                             <QueryParamProvider
