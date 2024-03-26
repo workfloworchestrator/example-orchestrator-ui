@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "---------- Running TSC ----------"
+npm run tsc
+
+echo "---------- Running Linter ----------"
+npm run lint
+
+echo "---------- Running Tests ----------"
+npm run test
