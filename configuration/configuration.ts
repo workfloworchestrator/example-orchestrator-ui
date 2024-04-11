@@ -46,5 +46,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
             process.env.ORCHESTRATOR_WEBSOCKET_URL ||
             DEFAULT_ORCHESTRATOR_WEBSOCKET_URL,
         authActive: process.env.AUTH_ACTIVE?.toLowerCase() != 'false',
+        useWebSockets: process.env.USE_WEB_SOCKETS?.toLowerCase() === 'true',
+        useThemeToggle: process.env.USE_THEME_TOGGLE?.toLowerCase() === 'true',
     };
 };
