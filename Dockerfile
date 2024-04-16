@@ -13,11 +13,12 @@ RUN npm run build
 FROM node:18-alpine AS runner
 
 # ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
 ENV NEXT_TELEMETRY_DISABLED 1
 
 COPY --from=builder /app/.next/standalone /app
 COPY --from=builder /app/.next/static /app/.next/static
-COPY --from=prod-builder /app/public /app/public
+COPY --from=builder /app/public /app/public
 
 WORKDIR /app
 USER node
