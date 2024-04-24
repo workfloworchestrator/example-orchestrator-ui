@@ -16,6 +16,7 @@ export const PROCESSES_ENDPOINT = '/processes';
 export const SUBSCRIPTION_ACTIONS_ENDPOINT = '/subscriptions/workflows';
 export const SUBSCRIPTION_PROCESSES_ENDPOINT =
     '/processes/process-subscriptions-by-subscription-id';
+export const DEFAULT_WORKFLOW_INFORMATION_LINK_URL = 'http://localhost:8080';
 
 export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
     const orchestratorGraphqlBaseUrl =
@@ -48,5 +49,11 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         authActive: process.env.AUTH_ACTIVE?.toLowerCase() != 'false',
         useWebSockets: process.env.USE_WEB_SOCKETS?.toLowerCase() === 'true',
         useThemeToggle: process.env.USE_THEME_TOGGLE?.toLowerCase() === 'true',
+        workflowInformationLinkUrl:
+            process.env.WORKFLOW_INFORMATION_LINK_URL ??
+            DEFAULT_WORKFLOW_INFORMATION_LINK_URL,
+        showWorkflowInformationLink:
+            process.env.SHOW_WORKFLOW_INFORMATION_LINK?.toLowerCase() ===
+            'true',
     };
 };
