@@ -23,7 +23,9 @@ const wfoProvider: OAuthConfig<WfoUserProfile> = {
         `${process.env.NEXTAUTH_ISSUER || ''}/.well-known/openid-configuration`,
     authorization: {
         params: {
-            scope: process.env.NEXTAUTH_AUTHORIZATION_SCOPE ?? 'openid profile',
+            scope:
+                process.env.NEXTAUTH_AUTHORIZATION_SCOPE_OVERRIDE ??
+                'openid profile',
         },
     },
     idToken: true,
