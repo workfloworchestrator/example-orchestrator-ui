@@ -1,1 +1,70 @@
-{}
+{
+    "notifications": {
+        "title": "Notifications",
+
+        "tabs": {
+            "active": "Active",
+            "terminated": "Tab 2",
+            "transient": "Tab 3",
+            "all": "All"
+        },
+
+        "loadingStatus": "Loading status"
+    },
+    "jobsList": {
+        "rerunAll": "Rerun all jobs",
+        "rerunAllQuestion": "Sure?",
+        "jobName": "Job name"
+    },
+    "routines": {
+        "title": "Routines",
+        "tabs": {
+            "active": "Started",
+            "completed": "Stopped"
+        }
+    },
+    "configurations": {
+        "fixedVersionTypes": {
+            "resourceId": "Fixed version ID",
+            "type": "Fixed version type",
+            "description": "Description",
+            "usedInProductBlocks": "Used where"
+        },
+        "productBlocks": {
+            "id": "ID",
+            "name": "Name",
+            "tag": "Tag",
+            "description": "Description",
+            "status": "Status",
+            "dependingProductBlocks": "Depends on",
+            "resourceTypes": "Fixed inputs"
+        },
+        "products": {
+            "id": "ID",
+            "name": "Name",
+            "tag": "Tag",
+            "description": "Description",
+            "productType": "Product type",
+            "status": "Status",
+            "fixedInputs": "Fixed inputs",
+            "productBlocks": "Product blocks",
+            "createdAt": "Created at"
+        },
+        "routines": {
+            "name": "Routine",
+            "description": "Description",
+            "target": "Goal",
+            "createdAt": "Created at",
+            "productTags": "Product tags"
+        }
+    },
+    "metadata": {
+        "title": "Configurations",
+        "tabs": {
+            "fixedVersionTypes": "Fixed version types",
+            "products": "Products",
+            "productBlocks": "Product blocks",
+            "routines": "Routines"
+        }
+    }
+}
