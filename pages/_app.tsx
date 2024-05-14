@@ -11,7 +11,6 @@ import Head from 'next/head';
 import { QueryParamProvider } from 'use-query-params';
 
 import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
-import '@elastic/eui/dist/eui_theme_dark.min.css';
 import '@elastic/eui/dist/eui_theme_light.min.css';
 import {
     ApiClientContextProvider,
