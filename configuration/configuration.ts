@@ -30,13 +30,9 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
 
     return {
         orchestratorApiBaseUrl,
-        engineStatusEndpoint: orchestratorApiBaseUrl + ENGINE_STATUS_ENDPOINT,
         graphqlEndpointCore: orchestratorGraphqlBaseUrl,
-        processesEndpoint: orchestratorApiBaseUrl + PROCESSES_ENDPOINT,
         environmentName:
             process.env.ENVIRONMENT_NAME ?? Environment.DEVELOPMENT,
-        subscriptionProcessesEndpoint:
-            orchestratorApiBaseUrl + SUBSCRIPTION_PROCESSES_ENDPOINT,
         orchestratorWebsocketUrl:
             process.env.ORCHESTRATOR_WEBSOCKET_URL ||
             DEFAULT_ORCHESTRATOR_WEBSOCKET_URL,
