@@ -13,7 +13,6 @@ import { QueryParamProvider } from 'use-query-params';
 import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
 import '@elastic/eui/dist/eui_theme_light.min.css';
 import {
-    ApiClientContextProvider,
     ColorModes,
     ConfirmationDialogContextWrapper,
     OrchestratorConfig,
@@ -22,6 +21,7 @@ import {
     WfoAuth,
     WfoErrorBoundary,
     WfoPageTemplate,
+    WfoRouteChangeListener,
     WfoToastsList,
     defaultOrchestratorTheme,
 } from '@orchestrator-ui/orchestrator-ui-components';
@@ -77,6 +77,7 @@ function CustomApp({
                 initialOrchestratorConfig={orchestratorConfig}
             >
                 <StoreProvider initialOrchestratorConfig={orchestratorConfig}>
+                    <WfoRouteChangeListener />
                     <SessionProvider session={pageProps.session}>
                         <NoSSR>
                             <WfoAuth>
@@ -84,57 +85,53 @@ function CustomApp({
                                     colorMode={themeMode}
                                     modify={defaultOrchestratorTheme}
                                 >
-                                    <ApiClientContextProvider>
-                                        <QueryClientProvider
-                                            client={queryClient}
-                                            contextSharing={true}
-                                        >
-                                            <TranslationsProvider>
-                                                <Head>
-                                                    <link
-                                                        rel="icon"
-                                                        href="/favicon.png"
-                                                    />
-                                                    <title>
-                                                        Welcome to
-                                                        example-orchestrator-ui!
-                                                    </title>
-                                                </Head>
-                                                <main className="app">
-                                                    <ConfirmationDialogContextWrapper>
-                                                        <WfoPageTemplate
-                                                            getAppLogo={
-                                                                getAppLogo
+                                    <QueryClientProvider
+                                        client={queryClient}
+                                        contextSharing={true}
+                                    >
+                                        <TranslationsProvider>
+                                            <Head>
+                                                <link
+                                                    rel="icon"
+                                                    href="/favicon.png"
+                                                />
+                                                <title>
+                                                    Welcome to
+                                                    example-orchestrator-ui!
+                                                </title>
+                                            </Head>
+                                            <main className="app">
+                                                <ConfirmationDialogContextWrapper>
+                                                    <WfoPageTemplate
+                                                        getAppLogo={getAppLogo}
+                                                        onThemeSwitch={
+                                                            handleThemeSwitch
+                                                        }
+                                                    >
+                                                        <QueryParamProvider
+                                                            adapter={
+                                                                NextAdapter
                                                             }
-                                                            onThemeSwitch={
-                                                                handleThemeSwitch
-                                                            }
+                                                            options={{
+                                                                removeDefaultsFromUrl:
+                                                                    false,
+                                                                enableBatching:
+                                                                    true,
+                                                            }}
                                                         >
-                                                            <QueryParamProvider
-                                                                adapter={
-                                                                    NextAdapter
-                                                                }
-                                                                options={{
-                                                                    removeDefaultsFromUrl:
-                                                                        false,
-                                                                    enableBatching:
-                                                                        true,
-                                                                }}
-                                                            >
-                                                                <Component
-                                                                    {...pageProps}
-                                                                />
-                                                            </QueryParamProvider>
-                                                        </WfoPageTemplate>
-                                                        <WfoToastsList />
-                                                    </ConfirmationDialogContextWrapper>
-                                                    <ReactQueryDevtools
-                                                        initialIsOpen={false}
-                                                    />
-                                                </main>
-                                            </TranslationsProvider>
-                                        </QueryClientProvider>
-                                    </ApiClientContextProvider>
+                                                            <Component
+                                                                {...pageProps}
+                                                            />
+                                                        </QueryParamProvider>
+                                                    </WfoPageTemplate>
+                                                    <WfoToastsList />
+                                                </ConfirmationDialogContextWrapper>
+                                                <ReactQueryDevtools
+                                                    initialIsOpen={false}
+                                                />
+                                            </main>
+                                        </TranslationsProvider>
+                                    </QueryClientProvider>
                                 </EuiProvider>
                             </WfoAuth>
                         </NoSSR>
