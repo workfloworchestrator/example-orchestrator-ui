@@ -8,10 +8,13 @@ import { SessionProvider } from "next-auth/react";
 import { NextAdapter } from "next-query-params";
 import App, { AppContext, AppInitialProps, AppProps } from "next/app";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { QueryParamProvider } from "use-query-params";
 
+import type { EuiSideNavItemType } from "@elastic/eui";
 import { EuiProvider, EuiThemeColorMode } from "@elastic/eui";
 import "@elastic/eui/dist/eui_theme_light.min.css";
+
 import {
     ColorModes,
     ConfirmationDialogContextWrapper,
@@ -20,6 +23,7 @@ import {
     StoreProvider,
     WfoAuth,
     WfoErrorBoundary,
+    WfoMenuItemLink,
     WfoPageTemplate,
     WfoToastsList,
     defaultOrchestratorTheme,
@@ -47,6 +51,7 @@ function CustomApp({
     pageProps,
     orchestratorConfig,
 }: AppProps & AppOwnProps) {
+    const router = useRouter();
     const [queryClient] = useState(() => new QueryClient(queryClientConfig));
 
     const [themeMode, setThemeMode] = useState<EuiThemeColorMode>(
@@ -69,6 +74,25 @@ function CustomApp({
             handleThemeSwitch(ColorModes.LIGHT);
         }
     }, []);
+
+    const addMenuItems = (
+        defaultMenuItems: EuiSideNavItemType<object>[]
+    ): EuiSideNavItemType<object>[] => [
+        ...defaultMenuItems,
+        {
+            name: "Example form",
+            id: "10",
+            isSelected: router.pathname === "/example-form",
+            href: "/example-form",
+            renderItem: () => (
+                <WfoMenuItemLink
+                    path={"/example-form"}
+                    translationString="Example form"
+                    isSelected={router.pathname === "/example-form"}
+                />
+            ),
+        },
+    ];
 
     return (
         <WfoErrorBoundary>
@@ -104,6 +128,9 @@ function CustomApp({
                                                         getAppLogo={getAppLogo}
                                                         onThemeSwitch={
                                                             handleThemeSwitch
+                                                        }
+                                                        overrideMenuItems={
+                                                            addMenuItems
                                                         }
                                                     >
                                                         <QueryParamProvider
