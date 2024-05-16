@@ -2,22 +2,25 @@ import React from 'react';
 
 import { useRouter } from 'next/router';
 
-import { EuiSpacer } from '@elastic/eui';
+import {
+    EuiFlexGroup,
+    EuiFlexItem,
+    EuiPageHeader,
+    EuiSpacer,
+} from '@elastic/eui';
 import { WfoUserInputForm } from '@orchestrator-ui/orchestrator-ui-components';
 import type { InputForm } from '@orchestrator-ui/orchestrator-ui-components';
 
 export function ExampleFormPage() {
     const router = useRouter();
 
-    const submit = (userInput: { [index: string]: unknown }) => {
-        // eslint-disable-next-line no-console
-        console.log(userInput);
-        alert('See console for submitted form data');
+    const submit = () => {
+        alert('The form is submitted');
         return Promise.resolve();
     };
 
     const cancel = () => {
-        alert('the form is cancelled');
+        alert('The form is cancelled');
     };
 
     const formDefinition = {
@@ -76,11 +79,6 @@ export function ExampleFormPage() {
                 enum: ['option1', 'option2', 'option3'],
                 checkboxes: true,
             },
-            acceptField: {
-                title: 'Accept field',
-                type: 'string',
-                format: 'accept',
-            },
             timestampField: {
                 default: new Date().getTime(),
                 format: 'timestamp',
@@ -121,25 +119,37 @@ export function ExampleFormPage() {
                 format: 'customerId',
             },
         },
-        title: 'Example form',
         type: 'object',
     };
 
     return (
-        <>
-            <WfoUserInputForm
-                key={'key'}
-                router={router}
-                stepUserInput={formDefinition as InputForm}
-                validSubmit={submit}
-                hasNext={false}
-                hasPrev={false}
-                cancel={cancel}
-                previous={cancel}
-                userInput={[]}
-            />
-            <EuiSpacer />
-        </>
+        <EuiFlexGroup>
+            <EuiFlexItem>
+                <EuiPageHeader pageTitle="Example form" />
+                <EuiSpacer />
+                This page shows a sample of form fields that can be used to
+                automatically create forms when creating workflows in the
+                Workflow Orchestrator. For more information, see the
+                <a
+                    href="https://workfloworchestrator.org/orchestrator-core/reference-docs/forms/"
+                    target="_blank"
+                >
+                    Forms documentation
+                </a>
+                <EuiSpacer />
+                <WfoUserInputForm
+                    key={'key'}
+                    router={router}
+                    stepUserInput={formDefinition as InputForm}
+                    validSubmit={submit}
+                    hasNext={false}
+                    hasPrev={false}
+                    cancel={cancel}
+                    previous={cancel}
+                    userInput={[]}
+                />
+            </EuiFlexItem>
+        </EuiFlexGroup>
     );
 }
 
