@@ -7,13 +7,13 @@ import {
     EuiFlexItem,
     EuiPageHeader,
     EuiSpacer,
+    EuiText,
 } from '@elastic/eui';
 import {
     WfoJsonCodeBlock,
     WfoUserInputForm,
 } from '@orchestrator-ui/orchestrator-ui-components';
 import type { InputForm } from '@orchestrator-ui/orchestrator-ui-components';
-import { PROCESSES_ENDPOINT } from '@orchestrator-ui/orchestrator-ui-components';
 
 export function ExampleFormPage() {
     const router = useRouter();
@@ -132,11 +132,12 @@ export function ExampleFormPage() {
             <EuiFlexItem>
                 <EuiPageHeader pageTitle="Example form" />
                 <EuiSpacer />
-                This page shows the form definition that a fictitious `$
-                {PROCESSES_ENDPOINT}`/test-name endpoint might return to request
-                userInput it needs and the form it is turned into. It shows the
-                form fields and their types, and how they are rendered in the
-                form.
+                <EuiText>
+                    This page shows the form definition that a fictitious
+                    /example-form endpoint might return to request user input it
+                    needs. It shows the form fields and their types, and how
+                    they are rendered in the form.
+                </EuiText>
                 <EuiSpacer />
                 <div>
                     <a
