@@ -8,8 +8,12 @@ import {
     EuiPageHeader,
     EuiSpacer,
 } from '@elastic/eui';
-import { WfoUserInputForm } from '@orchestrator-ui/orchestrator-ui-components';
+import {
+    WfoJsonCodeBlock,
+    WfoUserInputForm,
+} from '@orchestrator-ui/orchestrator-ui-components';
 import type { InputForm } from '@orchestrator-ui/orchestrator-ui-components';
+import { PROCESSES_ENDPOINT } from '@orchestrator-ui/orchestrator-ui-components';
 
 export function ExampleFormPage() {
     const router = useRouter();
@@ -120,6 +124,7 @@ export function ExampleFormPage() {
             },
         },
         type: 'object',
+        title: 'Example form',
     };
 
     return (
@@ -127,15 +132,22 @@ export function ExampleFormPage() {
             <EuiFlexItem>
                 <EuiPageHeader pageTitle="Example form" />
                 <EuiSpacer />
-                This page shows a sample of form fields that can be used to
-                automatically create forms when creating workflows in the
-                Workflow Orchestrator. For more information, see the
-                <a
-                    href="https://workfloworchestrator.org/orchestrator-core/reference-docs/forms/"
-                    target="_blank"
-                >
-                    Forms documentation
-                </a>
+                This page shows the form definition that a fictitious `$
+                {PROCESSES_ENDPOINT}`/test-name endpoint might return to request
+                userInput it needs and the form it is turned into. It shows the
+                form fields and their types, and how they are rendered in the
+                form.
+                <EuiSpacer />
+                <div>
+                    <a
+                        href="https://workfloworchestrator.org/orchestrator-core/reference-docs/forms/"
+                        target="_blank"
+                    >
+                        For more see the Forms documentation
+                    </a>
+                </div>
+                <EuiSpacer />
+                <WfoJsonCodeBlock data={formDefinition} />
                 <EuiSpacer />
                 <WfoUserInputForm
                     key={'key'}
