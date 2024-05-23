@@ -77,7 +77,6 @@ function CustomApp({
                 initialOrchestratorConfig={orchestratorConfig}
             >
                 <StoreProvider initialOrchestratorConfig={orchestratorConfig}>
-                    <WfoRouteChangeListener />
                     <SessionProvider session={pageProps.session}>
                         <NoSSR>
                             <WfoAuth>
