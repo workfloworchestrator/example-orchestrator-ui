@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import NoSSR from 'react-no-ssr';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { QueryClientConfig } from 'react-query/types/core/types';
+import React, { useEffect, useState } from "react";
+import NoSSR from "react-no-ssr";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { QueryClientConfig } from "react-query/types/core/types";
 
-import { SessionProvider } from 'next-auth/react';
-import { NextAdapter } from 'next-query-params';
-import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
-import Head from 'next/head';
-import { QueryParamProvider } from 'use-query-params';
+import { SessionProvider } from "next-auth/react";
+import { NextAdapter } from "next-query-params";
+import App, { AppContext, AppInitialProps, AppProps } from "next/app";
+import Head from "next/head";
+import { QueryParamProvider } from "use-query-params";
 
-import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
-import '@elastic/eui/dist/eui_theme_light.min.css';
+import { EuiProvider, EuiThemeColorMode } from "@elastic/eui";
+import "@elastic/eui/dist/eui_theme_light.min.css";
 import {
     ColorModes,
     ConfirmationDialogContextWrapper,
@@ -21,16 +21,15 @@ import {
     WfoAuth,
     WfoErrorBoundary,
     WfoPageTemplate,
-    WfoRouteChangeListener,
     WfoToastsList,
     defaultOrchestratorTheme,
-} from '@orchestrator-ui/orchestrator-ui-components';
+} from "@orchestrator-ui/orchestrator-ui-components";
 
-import { getAppLogo } from '@/components/AppLogo/AppLogo';
-import { getInitialOrchestratorConfig } from '@/configuration';
-import { TranslationsProvider } from '@/translations/translationsProvider';
+import { getAppLogo } from "@/components/AppLogo/AppLogo";
+import { getInitialOrchestratorConfig } from "@/configuration";
+import { TranslationsProvider } from "@/translations/translationsProvider";
 
-import '../font/inter.css';
+import "../font/inter.css";
 
 type AppOwnProps = { orchestratorConfig: OrchestratorConfig };
 
@@ -51,17 +50,17 @@ function CustomApp({
     const [queryClient] = useState(() => new QueryClient(queryClientConfig));
 
     const [themeMode, setThemeMode] = useState<EuiThemeColorMode>(
-        ColorModes.LIGHT,
+        ColorModes.LIGHT
     );
 
     const handleThemeSwitch = (newThemeMode: EuiThemeColorMode) => {
         setThemeMode(newThemeMode);
-        localStorage.setItem('themeMode', newThemeMode);
+        localStorage.setItem("themeMode", newThemeMode);
     };
 
     useEffect(() => {
         // Initialize theme mode from localStorage or set it to 'light' if not present
-        const storedTheme = localStorage.getItem('themeMode');
+        const storedTheme = localStorage.getItem("themeMode");
         if (
             !storedTheme ||
             (storedTheme !== ColorModes.LIGHT &&
@@ -142,7 +141,7 @@ function CustomApp({
 }
 
 CustomApp.getInitialProps = async (
-    context: AppContext,
+    context: AppContext
 ): Promise<AppOwnProps & AppInitialProps> => {
     const ctx = await App.getInitialProps(context);
 
