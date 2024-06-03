@@ -35,6 +35,7 @@ jobs:
               run: npm ci
             - run: npm run tsc
             - run: npm run lint
+            - run: npm run prettier
 
     unit-tests:
         runs-on: ubuntu-latest
