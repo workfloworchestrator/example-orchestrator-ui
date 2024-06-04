@@ -1,6 +1,6 @@
 # Breaking Changes
 
-## <Todo: commit hash here>
+## Commit: edec88ccce4ac168d7e23c29477ee42748d20778 (Tue Jun 4 16:09:42 2024 +0200)
 
 Renaming environment variables:
 
