@@ -1,6 +1,6 @@
 # Breaking Changes
 
-## v2.0.0
+## <Todo: commit hash here>
 
 Renaming environment variables:
 
