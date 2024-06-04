@@ -5,27 +5,43 @@ import { OAuthConfig } from 'next-auth/providers';
 import {
     WfoSession,
     WfoUserProfile,
+    getEnvironmentVariables,
 } from '@orchestrator-ui/orchestrator-ui-components';
 
-const token_endpoint_auth_method = process.env.NEXTAUTH_CLIENT_SECRET
+const {
+    OAUTH2_ACTIVE,
+    OAUTH2_CLIENT_ID,
+    OAUTH2_CLIENT_SECRET,
+    NEXTAUTH_PROVIDER_ID,
+    NEXTAUTH_PROVIDER_NAME,
+    NEXTAUTH_AUTHORIZATION_SCOPE_OVERRIDE,
+    OIDC_CONF_FULL_WELL_KNOWN_URL,
+} = getEnvironmentVariables([
+    'OAUTH2_ACTIVE',
+    'OAUTH2_CLIENT_ID',
+    'OAUTH2_CLIENT_SECRET',
+    'NEXTAUTH_PROVIDER_ID',
+    'NEXTAUTH_PROVIDER_NAME',
+    'NEXTAUTH_AUTHORIZATION_SCOPE_OVERRIDE',
+    'OIDC_CONF_FULL_WELL_KNOWN_URL',
+]);
+
+const isOauth2Enabled = OAUTH2_ACTIVE?.toLowerCase() != 'false';
+
+const token_endpoint_auth_method = OAUTH2_CLIENT_SECRET
     ? 'client_secret_basic'
     : 'none';
 
-const authActive = process.env.AUTH_ACTIVE?.toLowerCase() != 'false';
 const wfoProvider: OAuthConfig<WfoUserProfile> = {
-    id: process.env.NEXTAUTH_ID || '',
-    name: process.env.NEXTAUTH_ID || '',
+    id: NEXTAUTH_PROVIDER_ID,
+    name: NEXTAUTH_PROVIDER_NAME,
     type: 'oauth',
-    clientId: process.env.NEXTAUTH_CLIENT_ID || '',
-    clientSecret: process.env.NEXTAUTH_CLIENT_SECRET || undefined,
-    wellKnown:
-        process.env.NEXTAUTH_WELL_KNOWN_OVERRIDE ??
-        `${process.env.NEXTAUTH_ISSUER || ''}/.well-known/openid-configuration`,
+    clientId: OAUTH2_CLIENT_ID,
+    clientSecret: OAUTH2_CLIENT_SECRET || undefined,
+    wellKnown: OIDC_CONF_FULL_WELL_KNOWN_URL,
     authorization: {
         params: {
-            scope:
-                process.env.NEXTAUTH_AUTHORIZATION_SCOPE_OVERRIDE ??
-                'openid profile',
+            scope: NEXTAUTH_AUTHORIZATION_SCOPE_OVERRIDE ?? 'openid profile',
         },
     },
     idToken: true,
@@ -55,7 +71,7 @@ const wfoProvider: OAuthConfig<WfoUserProfile> = {
 };
 
 export const authOptions: AuthOptions = {
-    providers: authActive ? [wfoProvider] : [],
+    providers: isOauth2Enabled ? [wfoProvider] : [],
     callbacks: {
         async jwt({ token, account, profile }) {
             // The "account" is only available right after signing in -- adding useful data to the token
