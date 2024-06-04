@@ -1,15 +1,15 @@
+import React from 'react';
+
 import {
     PolicyResource,
     WfoPolicyRenderPageFallback,
     WfoResourceTypesPage,
-  } from '@orchestrator-ui/orchestrator-ui-components';
-  import React from 'react';
-  
-  export const ResourceTypesPage = () => (
+} from '@orchestrator-ui/orchestrator-ui-components';
+
+export const ResourceTypesPage = () => (
     <WfoPolicyRenderPageFallback resource={PolicyResource.NAVIGATION_METADATA}>
-      <WfoResourceTypesPage />
+        <WfoResourceTypesPage />
     </WfoPolicyRenderPageFallback>
-  );
-  
-  export default ResourceTypesPage;
-  
+);
+
+export default ResourceTypesPage;

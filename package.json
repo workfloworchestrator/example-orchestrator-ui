@@ -9,6 +9,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
+        "prettier": "prettier -c \"{**/*,*}.{ts,tsx,json,js,md}\"",
+        "prettier-fix": "prettier --write \"{**/*,*}.{ts,tsx,json,js,md}\"",
         "prepare": "husky"
     },
     "dependencies": {
