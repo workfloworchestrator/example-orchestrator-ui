@@ -1,17 +1,17 @@
+import React from 'react';
+
 import {
     PolicyResource,
     WfoPolicyRenderPageFallback,
     WfoSubscriptionDetailPage,
-  } from '@orchestrator-ui/orchestrator-ui-components';
-  import React from 'react';
-  
-  const SubscriptionDetailPage = () => (
+} from '@orchestrator-ui/orchestrator-ui-components';
+
+const SubscriptionDetailPage = () => (
     <WfoPolicyRenderPageFallback
-      resource={PolicyResource.NAVIGATION_SUBSCRIPTIONS}
+        resource={PolicyResource.NAVIGATION_SUBSCRIPTIONS}
     >
-      <WfoSubscriptionDetailPage />
+        <WfoSubscriptionDetailPage />
     </WfoPolicyRenderPageFallback>
-  );
-  
-  export default SubscriptionDetailPage;
-  
+);
+
+export default SubscriptionDetailPage;
