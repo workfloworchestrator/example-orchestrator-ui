@@ -14,4 +14,4 @@ Renaming environment variables:
 | NEXTAUTH_ISSUER              | OIDC_CONF_FULL_WELL_KNOWN_URL |
 | NEXTAUTH_WELL_KNOWN_OVERRIDE | OIDC_CONF_FULL_WELL_KNOWN_URL |
 
-Note: `NEXTAUTH_ID` is split up in 2 new environment variables. The `NEXTAUTH_ISSUER` and `NEXTAUTH_WELL_KNOWN_OVERRIDE` are replaces by one new environment variable.
+Note: `NEXTAUTH_ID` is split up in 2 new environment variables. The `NEXTAUTH_ISSUER` and `NEXTAUTH_WELL_KNOWN_OVERRIDE` are replaced by one new environment variable.
