@@ -41,7 +41,7 @@ const wfoProvider: OAuthConfig<WfoUserProfile> = {
     wellKnown: OIDC_CONF_FULL_WELL_KNOWN_URL,
     authorization: {
         params: {
-            scope: NEXTAUTH_AUTHORIZATION_SCOPE_OVERRIDE ?? 'openid profile',
+            scope: NEXTAUTH_AUTHORIZATION_SCOPE_OVERRIDE || 'openid profile',
         },
     },
     idToken: true,
