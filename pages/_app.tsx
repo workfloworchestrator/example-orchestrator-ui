@@ -33,6 +33,7 @@ import { getInitialOrchestratorConfig } from '@/configuration';
 import { TranslationsProvider } from '@/translations/translationsProvider';
 
 import '../font/inter.css';
+import useFetchInterceptor from "@/hooks/useFetchInterceptor";
 
 type AppOwnProps = { orchestratorConfig: OrchestratorConfig };
 
@@ -52,6 +53,7 @@ function CustomApp({
 }: AppProps & AppOwnProps) {
     const router = useRouter();
     const [queryClient] = useState(() => new QueryClient(queryClientConfig));
+    useFetchInterceptor();
 
     const [themeMode, setThemeMode] = useState<EuiThemeColorMode>(
         ColorModes.LIGHT,
