@@ -30,10 +30,10 @@ import {
 
 import { getAppLogo } from '@/components/AppLogo/AppLogo';
 import { getInitialOrchestratorConfig } from '@/configuration';
+import useFetchInterceptor from '@/hooks/useFetchInterceptor';
 import { TranslationsProvider } from '@/translations/translationsProvider';
 
 import '../font/inter.css';
-import useFetchInterceptor from "@/hooks/useFetchInterceptor";
 
 type AppOwnProps = { orchestratorConfig: OrchestratorConfig };
 
