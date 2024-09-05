@@ -17,6 +17,8 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         WORKFLOW_INFORMATION_LINK_URL,
         SHOW_WORKFLOW_INFORMATION_LINK,
         OAUTH2_ACTIVE,
+        ENABLE_SUPPORT_MENU_ITEM,
+        SUPPORT_MENU_ITEM_URL,
     } = getEnvironmentVariables([
         'USE_THEME_TOGGLE',
         'ENVIRONMENT_NAME',
@@ -29,6 +31,8 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         'WORKFLOW_INFORMATION_LINK_URL',
         'SHOW_WORKFLOW_INFORMATION_LINK',
         'OAUTH2_ACTIVE',
+        'ENABLE_SUPPORT_MENU_ITEM',
+        'SUPPORT_MENU_ITEM_URL',
     ]);
 
     const graphqlEndpointCore = `${ORCHESTRATOR_GRAPHQL_HOST}${ORCHESTRATOR_GRAPHQL_PATH}`;
@@ -45,5 +49,8 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         workflowInformationLinkUrl: WORKFLOW_INFORMATION_LINK_URL,
         showWorkflowInformationLink:
             SHOW_WORKFLOW_INFORMATION_LINK?.toLowerCase() === 'true',
+        enableSupportMenuItem:
+            ENABLE_SUPPORT_MENU_ITEM?.toLowerCase() === 'true',
+        supportMenuItemUrl: SUPPORT_MENU_ITEM_URL,
     };
 };
