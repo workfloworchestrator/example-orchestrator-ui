@@ -32,6 +32,67 @@ const token_endpoint_auth_method = OAUTH2_CLIENT_SECRET
     ? 'client_secret_basic'
     : 'none';
 
+const calculateExpirationDate = (expiresIn?: number) => {
+    if (!expiresIn) {
+        return undefined;
+    }
+
+    return Math.floor(Date.now() / 1000) + expiresIn;
+};
+const getWellKnownData = async () => {
+    const wellKnownUrl = new URL(OIDC_CONF_FULL_WELL_KNOWN_URL);
+    const wellKnown = await fetch(wellKnownUrl);
+    return await wellKnown.json();
+};
+async function refreshAccessToken(token: JWT): Promise<JWT> {
+    const { token_endpoint } = await getWellKnownData();
+
+    try {
+        const raw = {
+            client_id: OAUTH2_CLIENT_ID,
+            client_secret: OAUTH2_CLIENT_SECRET,
+            grant_type: 'refresh_token',
+            refresh_token: token.refreshToken as string,
+        };
+
+        const response = await fetch(token_endpoint, {
+            method: 'POST',
+            body: new URLSearchParams(raw),
+        });
+
+        if (response.ok) {
+            const data: {
+                access_token: string;
+                expires_in: number;
+                refresh_token: string;
+                refresh_expires_in: number;
+            } = await response.json();
+
+            return {
+                ...token,
+                accessToken: data.access_token,
+                accessTokenExpiresAt: calculateExpirationDate(data.expires_in),
+                refreshToken: data.refresh_token,
+                refreshTokenExpiresAt: calculateExpirationDate(
+                    data.refresh_expires_in,
+                ),
+            };
+        } else {
+            console.error(
+                'An error occurred while refreshing the access token: ',
+                response.statusText,
+            );
+            return token;
+        }
+    } catch (error) {
+        console.error(
+            'An error occurred while refreshing the access token: ',
+            error,
+        );
+        return token;
+    }
+}
+
 const wfoProvider: OAuthConfig<WfoUserProfile> = {
     id: NEXTAUTH_PROVIDER_ID,
     name: NEXTAUTH_PROVIDER_NAME,
@@ -74,21 +135,46 @@ export const authOptions: AuthOptions = {
     providers: isOauth2Enabled ? [wfoProvider] : [],
     callbacks: {
         async jwt({ token, account, profile }) {
+            // First time after signing in
             // The "account" is only available right after signing in -- adding useful data to the token
             if (account) {
-                token.accessToken = account.access_token;
-                token.profile = profile;
+                return {
+                    ...token,
+                    accessToken: account.access_token,
+                    refreshToken: account.refresh_token,
+                    accessTokenExpiresAt: account.expires_at as number,
+                    refreshTokenExpiresAt: calculateExpirationDate(
+                        account.refresh_expires_in as number,
+                    ),
+                    profile,
+                };
             }
-            return token;
-        },
-        async session({ session, token }: { session: WfoSession; token: JWT }) {
-            // Assign data to the session to be available in the client through the useSession hook
-            session.profile = token.profile as WfoUserProfile | undefined;
-            session.accessToken = token.accessToken
-                ? String(token.accessToken)
-                : '';
 
-            return session;
+            const now = Math.floor(Date.now() / 1000);
+            if (
+                typeof token.accessTokenExpiresAt === 'number' &&
+                now < token.accessTokenExpiresAt
+            ) {
+                return token;
+            }
+
+            return await refreshAccessToken(token);
+        },
+        async session({
+            session,
+            token,
+        }: {
+            session: WfoSession;
+            token: JWT;
+        }): Promise<WfoSession> {
+            // Assign data to the session to be available in the client through the useSession hook
+            return {
+                ...session,
+                profile: token.profile as WfoUserProfile | undefined,
+                accessToken: token.accessToken ? String(token.accessToken) : '',
+                accessTokenExpiresAt: token.accessTokenExpiresAt as number,
+                refreshTokenExpiresAt: token.refreshTokenExpiresAt as number,
+            };
         },
     },
 };
