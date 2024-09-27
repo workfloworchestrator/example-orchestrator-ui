@@ -32,12 +32,14 @@ const token_endpoint_auth_method = OAUTH2_CLIENT_SECRET
     ? 'client_secret_basic'
     : 'none';
 
+const getCurrentDateInSeconds = () => Math.floor(Date.now() / 1000);
+
 const calculateExpirationDate = (expiresIn?: number) => {
     if (!expiresIn) {
         return undefined;
     }
 
-    return Math.floor(Date.now() / 1000) + expiresIn;
+    return getCurrentDateInSeconds() + expiresIn;
 };
 const getWellKnownData = async () => {
     const wellKnownUrl = new URL(OIDC_CONF_FULL_WELL_KNOWN_URL);
@@ -150,7 +152,7 @@ export const authOptions: AuthOptions = {
                 };
             }
 
-            const now = Math.floor(Date.now() / 1000);
+            const now = getCurrentDateInSeconds();
             if (
                 typeof token.accessTokenExpiresAt === 'number' &&
                 now < token.accessTokenExpiresAt
