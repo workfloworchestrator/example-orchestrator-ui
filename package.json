@@ -15,9 +15,9 @@
     },
     "dependencies": {
         "@elastic/datemath": "^5.0.3",
+        "@elastic/eui": "^97.0.0",
         "@emotion/css": "^11.11.2",
         "@emotion/react": "^11.11.1",
-        "@elastic/eui": "^95.1.0",
         "@orchestrator-ui/orchestrator-ui-components": "*",
         "@reduxjs/toolkit": "^2.0.1",
         "moment": "^2.29.4",
