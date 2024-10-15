@@ -42,3 +42,30 @@ The resulting translation keys and messages that are used is
   }
 }
 ```
+
+### Form label translations
+
+Forms provide translations that are used when displaying form elements. They are retrieved dynamically by calling
+the `translations/${locale}` endpoint. From the json result of this call the data in the `forms.fields` key is merged into
+the translations under the `pydanticForms.backendTranslations` key. These translations are referenced when rendering form input
+elements.
+
+The final translation dictionary will look like this
+
+```
+{
+  metadata: {
+    product: {
+      name: 'A better name',
+      description: 'Description'
+    }
+  }
+  pydanticForms: {
+    ...
+    backendTranslations: {
+        ... `form.fields` result from `translations/${locale}` call
+
+    }
+  }
+}
+```
