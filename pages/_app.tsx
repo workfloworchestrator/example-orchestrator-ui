@@ -132,7 +132,6 @@ function CustomApp({
                                     </TranslationsProvider>
                                 </EuiProvider>
                             </WfoAuth>
-
                     </SessionProvider>
                 </StoreProvider>
             </OrchestratorConfigProvider>
