@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import NoSSR from 'react-no-ssr';
 
 import { SessionProvider } from 'next-auth/react';
 import { NextAdapter } from 'next-query-params';
@@ -86,7 +85,6 @@ function CustomApp({
             >
                 <StoreProvider initialOrchestratorConfig={orchestratorConfig}>
                     <SessionProvider session={pageProps.session}>
-                        <NoSSR>
                             <WfoAuth>
                                 <EuiProvider
                                     colorMode={themeMode}
@@ -134,7 +132,7 @@ function CustomApp({
                                     </TranslationsProvider>
                                 </EuiProvider>
                             </WfoAuth>
-                        </NoSSR>
+
                     </SessionProvider>
                 </StoreProvider>
             </OrchestratorConfigProvider>
