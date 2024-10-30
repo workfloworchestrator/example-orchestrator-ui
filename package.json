@@ -11,7 +11,7 @@
         "lint": "next lint",
         "prettier": "prettier -c \"{**/*,*}.{ts,tsx,json,js,md}\"",
         "prettier-fix": "prettier --write \"{**/*,*}.{ts,tsx,json,js,md}\"",
-        "prepare": "husky"
+        "postinstall": "husky"
     },
     "dependencies": {
         "@elastic/datemath": "^5.0.3",
