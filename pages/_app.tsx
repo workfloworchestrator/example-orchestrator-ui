@@ -17,6 +17,7 @@ import {
     StoreProvider,
     WfoAuth,
     WfoErrorBoundary,
+    WfoErrorMonitoringProvider,
     WfoMenuItemLink,
     WfoPageTemplate,
     WfoToastsList,
@@ -85,44 +86,55 @@ function CustomApp({
             >
                 <StoreProvider initialOrchestratorConfig={orchestratorConfig}>
                     <SessionProvider session={pageProps.session}>
-                        <WfoAuth>
-                            <EuiProvider
-                                colorMode={themeMode}
-                                modify={defaultOrchestratorTheme}
-                            >
-                                <TranslationsProvider>
-                                    <Head>
-                                        <link rel="icon" href="/favicon.png" />
-                                        <title>
-                                            Welcome to example-orchestrator-ui!
-                                        </title>
-                                    </Head>
-                                    <main className="app">
-                                        <ConfirmationDialogContextWrapper>
-                                            <WfoPageTemplate
-                                                getAppLogo={getAppLogo}
-                                                onThemeSwitch={
-                                                    handleThemeSwitch
-                                                }
-                                                overrideMenuItems={addMenuItems}
-                                            >
-                                                <QueryParamProvider
-                                                    adapter={NextAdapter}
-                                                    options={{
-                                                        removeDefaultsFromUrl:
-                                                            false,
-                                                        enableBatching: true,
-                                                    }}
+                        <WfoErrorMonitoringProvider>
+                            <WfoAuth>
+                                <EuiProvider
+                                    colorMode={themeMode}
+                                    modify={defaultOrchestratorTheme}
+                                >
+                                    <TranslationsProvider>
+                                        <Head>
+                                            <link
+                                                rel="icon"
+                                                href="/favicon.png"
+                                            />
+                                            <title>
+                                                Welcome to
+                                                example-orchestrator-ui!
+                                            </title>
+                                        </Head>
+                                        <main className="app">
+                                            <ConfirmationDialogContextWrapper>
+                                                <WfoPageTemplate
+                                                    getAppLogo={getAppLogo}
+                                                    onThemeSwitch={
+                                                        handleThemeSwitch
+                                                    }
+                                                    overrideMenuItems={
+                                                        addMenuItems
+                                                    }
                                                 >
-                                                    <Component {...pageProps} />
-                                                </QueryParamProvider>
-                                            </WfoPageTemplate>
-                                            <WfoToastsList />
-                                        </ConfirmationDialogContextWrapper>
-                                    </main>
-                                </TranslationsProvider>
-                            </EuiProvider>
-                        </WfoAuth>
+                                                    <QueryParamProvider
+                                                        adapter={NextAdapter}
+                                                        options={{
+                                                            removeDefaultsFromUrl:
+                                                                false,
+                                                            enableBatching:
+                                                                true,
+                                                        }}
+                                                    >
+                                                        <Component
+                                                            {...pageProps}
+                                                        />
+                                                    </QueryParamProvider>
+                                                </WfoPageTemplate>
+                                                <WfoToastsList />
+                                            </ConfirmationDialogContextWrapper>
+                                        </main>
+                                    </TranslationsProvider>
+                                </EuiProvider>
+                            </WfoAuth>
+                        </WfoErrorMonitoringProvider>
                     </SessionProvider>
                 </StoreProvider>
             </OrchestratorConfigProvider>
