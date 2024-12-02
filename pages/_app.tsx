@@ -17,6 +17,7 @@ import {
     StoreProvider,
     WfoAuth,
     WfoErrorBoundary,
+    WfoErrorMonitoring,
     WfoErrorMonitoringProvider,
     WfoMenuItemLink,
     WfoPageTemplate,
@@ -79,6 +80,11 @@ function CustomApp({
         },
     ];
 
+    const errorMonitoringHandler: WfoErrorMonitoring | undefined = {
+        reportError: (error) => console.error(error),
+        reportMessage: () => {},
+    };
+
     return (
         <WfoErrorBoundary>
             <OrchestratorConfigProvider
@@ -86,7 +92,9 @@ function CustomApp({
             >
                 <StoreProvider initialOrchestratorConfig={orchestratorConfig}>
                     <SessionProvider session={pageProps.session}>
-                        <WfoErrorMonitoringProvider>
+                        <WfoErrorMonitoringProvider
+                            errorMonitoringHandler={errorMonitoringHandler}
+                        >
                             <WfoAuth>
                                 <EuiProvider
                                     colorMode={themeMode}
