@@ -58,6 +58,8 @@ function CustomApp({
                 storedTheme !== ColorModes.DARK)
         ) {
             handleThemeSwitch(ColorModes.LIGHT);
+        } else {
+            handleThemeSwitch(storedTheme);
         }
     }, []);
 
