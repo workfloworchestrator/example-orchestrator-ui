@@ -38,12 +38,14 @@
         "@orchestrator-ui/jest-config": "*",
         "@orchestrator-ui/tsconfig": "*",
         "@testing-library/jest-dom": "^6.6.2",
+        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "@types/node": "^22.7.5",
         "@types/react": "^18.3.1",
         "@types/react-dom": "^18.2.18",
         "@types/react-no-ssr": "^1.1.7",
         "babel-jest": "^29.7.0",
         "husky": "^9.0.11",
+        "prettier": "^3.5.3",
         "typescript": "^5.5.2"
     }
 }
