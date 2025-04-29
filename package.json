@@ -8,7 +8,7 @@
         "tsc": "tsc --noEmit",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint",
+        "lint": "eslint",
         "prettier": "prettier -c \"{**/*,*}.{ts,tsx,json,js,md}\"",
         "prettier-fix": "prettier --write \"{**/*,*}.{ts,tsx,json,js,md}\"",
         "postinstall": "husky"
@@ -20,6 +20,7 @@
         "@emotion/react": "^11.11.1",
         "@orchestrator-ui/orchestrator-ui-components": "*",
         "@reduxjs/toolkit": "^2.0.1",
+        "eslint": "^9.25.1",
         "moment": "^2.29.4",
         "next": "^15.3.1",
         "next-auth": "^4.24.5",
@@ -43,7 +44,6 @@
         "@types/react-dom": "^18.2.18",
         "@types/react-no-ssr": "^1.1.7",
         "babel-jest": "^29.7.0",
-        "eslint": "^9.25.1",
         "husky": "^9.0.11",
         "prettier": "^3.5.3",
         "typescript": "^5.5.2"
