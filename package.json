@@ -15,7 +15,7 @@
     },
     "dependencies": {
         "@elastic/datemath": "^5.0.3",
-        "@elastic/eui": "^101.4.0",
+        "@elastic/eui": "^102.0.0",
         "@emotion/css": "^11.11.2",
         "@emotion/react": "^11.11.1",
         "@orchestrator-ui/orchestrator-ui-components": "*",
@@ -43,7 +43,7 @@
         "@types/react-dom": "^18.2.18",
         "@types/react-no-ssr": "^1.1.7",
         "babel-jest": "^29.7.0",
-        "eslint": "^8.57.1",
+        "eslint": "^9.25.1",
         "husky": "^9.0.11",
         "prettier": "^3.5.3",
         "typescript": "^5.5.2"
