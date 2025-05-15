@@ -9,6 +9,7 @@ import { QueryParamProvider } from 'use-query-params';
 
 import type { EuiSideNavItemType } from '@elastic/eui';
 import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
+import { EuiThemeAmsterdam } from '@elastic/eui';
 import {
     ColorModes,
     ConfirmationDialogContextWrapper,
@@ -97,6 +98,7 @@ function CustomApp({
                         >
                             <WfoAuth>
                                 <EuiProvider
+                                    theme={EuiThemeAmsterdam}
                                     colorMode={themeMode}
                                     modify={defaultOrchestratorTheme}
                                 >
