@@ -19,6 +19,8 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         OAUTH2_ACTIVE,
         ENABLE_SUPPORT_MENU_ITEM,
         SUPPORT_MENU_ITEM_URL,
+        ENABLE_AO_STACK_STATUS,
+        AO_STACK_STATUS_URL,
     } = getEnvironmentVariables([
         'USE_THEME_TOGGLE',
         'ENVIRONMENT_NAME',
@@ -33,6 +35,8 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         'OAUTH2_ACTIVE',
         'ENABLE_SUPPORT_MENU_ITEM',
         'SUPPORT_MENU_ITEM_URL',
+        'ENABLE_AO_STACK_STATUS',
+        'AO_STACK_STATUS_URL',
     ]);
 
     const graphqlEndpointCore = `${ORCHESTRATOR_GRAPHQL_HOST}${ORCHESTRATOR_GRAPHQL_PATH}`;
@@ -52,5 +56,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         enableSupportMenuItem:
             ENABLE_SUPPORT_MENU_ITEM?.toLowerCase() === 'true',
         supportMenuItemUrl: SUPPORT_MENU_ITEM_URL,
+        enableAoStackStatus: ENABLE_AO_STACK_STATUS?.toLowerCase() === 'true',
+        aoStackStatusUrl: AO_STACK_STATUS_URL,
     };
 };
