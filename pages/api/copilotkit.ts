@@ -2,11 +2,8 @@ import { HttpAgent } from '@ag-ui/client';
 import {
     CopilotRuntime,
     ExperimentalEmptyAdapter,
-    config as copilotConfig,
     copilotRuntimeNextJSPagesRouterEndpoint,
 } from '@copilotkit/runtime';
-
-export const config = copilotConfig;
 
 const runtime = new CopilotRuntime({
     agents: {
