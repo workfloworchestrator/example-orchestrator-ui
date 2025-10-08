@@ -81,7 +81,7 @@ function CustomApp({
         },
         {
             name: 'Search',
-            id: '10',
+            id: '11',
             isSelected: router.pathname === '/search',
             href: '/search',
             renderItem: () => (
@@ -94,7 +94,7 @@ function CustomApp({
         },
         {
             name: 'Agent',
-            id: '10',
+            id: '12',
             isSelected: router.pathname === '/agent',
             href: '/agent',
             renderItem: () => (
