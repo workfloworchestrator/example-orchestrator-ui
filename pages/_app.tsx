@@ -153,10 +153,8 @@ function CustomApp({
                                                     <QueryParamProvider
                                                         adapter={NextAdapter}
                                                         options={{
-                                                            removeDefaultsFromUrl:
-                                                                false,
-                                                            enableBatching:
-                                                                true,
+                                                            removeDefaultsFromUrl: false,
+                                                            enableBatching: true,
                                                         }}
                                                     >
                                                         <Component
