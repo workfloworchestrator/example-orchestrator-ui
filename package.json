@@ -1,6 +1,6 @@
 {
     "name": "wfo-ui",
-    "version": "2.5.0",
+    "version": "6.2.0",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -51,5 +51,8 @@
         "prettier": "^3.6.2",
         "typescript": "^5.9.2",
         "typescript-eslint": "^8.31.1"
+    },
+    "overrides": {
+        "@monaco-editor/loader": "1.5.0"
     }
 }
