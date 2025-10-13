@@ -19,7 +19,7 @@
         "@emotion/css": "^11.11.2",
         "@emotion/react": "^11.11.1",
         "@orchestrator-ui/orchestrator-ui-components": "*",
-        "@reduxjs/toolkit": "^2.0.1",
+        "@reduxjs/toolkit": "^2.9.0",
         "eslint": "^9.25.1",
         "moment": "^2.29.4",
         "next": "^15.5.4",
