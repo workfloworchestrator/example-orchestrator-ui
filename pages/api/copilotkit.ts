@@ -31,7 +31,8 @@ export default async function copilotHandler(
     const runtime = new CopilotRuntime({
         agents: {
             query_agent: new HttpAgent({
-                url: process.env.AGENT_URL || 'http://localhost:8080/agent/',
+                url:
+                    process.env.AGENT_URL || 'http://localhost:8080/api/agent/',
                 headers,
             }),
         },
