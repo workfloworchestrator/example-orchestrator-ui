@@ -23,7 +23,7 @@
         "eslint": "^9.25.1",
         "moment": "^2.29.4",
         "next": "^15.5.4",
-        "next-auth": "^4.24.5",
+        "next-auth": "^4.24.12",
         "next-intl": "^3.4.1",
         "next-query-params": "^5.0.0",
         "process": "0.11.10",
