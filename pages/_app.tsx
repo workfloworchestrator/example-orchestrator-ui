@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import _ from 'lodash';
 import { SessionProvider } from 'next-auth/react';
 import { NextAdapter } from 'next-query-params';
 import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
@@ -13,17 +14,21 @@ import { EuiThemeAmsterdam } from '@elastic/eui';
 import {
     ColorModes,
     ConfirmationDialogContextWrapper,
+    Environment,
     OrchestratorConfig,
     OrchestratorConfigProvider,
+    ProductLifecycleStatus,
     StoreProvider,
     WfoAuth,
     WfoErrorBoundary,
     WfoErrorMonitoring,
     WfoErrorMonitoringProvider,
+    WfoLogoSpinner,
     WfoMenuItemLink,
     WfoPageTemplate,
     WfoToastsList,
     defaultOrchestratorTheme,
+    emptyOrchestratorConfig,
 } from '@orchestrator-ui/orchestrator-ui-components';
 
 import { getAppLogo } from '@/components/AppLogo/AppLogo';
@@ -44,6 +49,7 @@ function CustomApp({
     const [themeMode, setThemeMode] = useState<EuiThemeColorMode>(
         ColorModes.LIGHT,
     );
+    const [loadedConfig, setLoadedConfig] = useState<OrchestratorConfig>();
 
     const handleThemeSwitch = (newThemeMode: EuiThemeColorMode) => {
         setThemeMode(newThemeMode);
@@ -61,6 +67,18 @@ function CustomApp({
             handleThemeSwitch(ColorModes.LIGHT);
         }
     }, []);
+
+    useEffect(() => {
+        if (!_.isEqual(orchestratorConfig, emptyOrchestratorConfig)) {
+            setLoadedConfig(orchestratorConfig);
+        }
+    }, [orchestratorConfig]);
+
+    if (!loadedConfig) {
+        return <WfoLogoSpinner />;
+    }
+
+    const { environmentName } = loadedConfig;
 
     const addMenuItems = (
         defaultMenuItems: EuiSideNavItemType<object>[],
@@ -112,12 +130,21 @@ function CustomApp({
         reportMessage: () => {},
     };
 
+    const startWorkflowFilters =
+        environmentName === Environment.PRODUCTION
+            ? [ProductLifecycleStatus.ACTIVE]
+            : [
+                  ProductLifecycleStatus.ACTIVE,
+                  ProductLifecycleStatus.PRE_PRODUCTION,
+                  ProductLifecycleStatus.PHASE_OUT,
+              ];
+
     return (
         <WfoErrorBoundary>
             <OrchestratorConfigProvider
-                initialOrchestratorConfig={orchestratorConfig}
+                initialOrchestratorConfig={loadedConfig}
             >
-                <StoreProvider initialOrchestratorConfig={orchestratorConfig}>
+                <StoreProvider initialOrchestratorConfig={loadedConfig}>
                     <SessionProvider session={pageProps.session}>
                         <WfoErrorMonitoringProvider
                             errorMonitoringHandler={errorMonitoringHandler}
@@ -148,6 +175,9 @@ function CustomApp({
                                                     }
                                                     overrideMenuItems={
                                                         addMenuItems
+                                                    }
+                                                    overrideStartWorkflowFilters={
+                                                        startWorkflowFilters
                                                     }
                                                 >
                                                     <QueryParamProvider
