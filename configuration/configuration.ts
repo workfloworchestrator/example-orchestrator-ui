@@ -21,7 +21,6 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         SUPPORT_MENU_ITEM_URL,
         ENABLE_AO_STACK_STATUS,
         AO_STACK_STATUS_URL,
-        ACTIVATE_PYDANTIC_FORMS,
     } = getEnvironmentVariables([
         'USE_THEME_TOGGLE',
         'ENVIRONMENT_NAME',
@@ -38,7 +37,6 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         'SUPPORT_MENU_ITEM_URL',
         'ENABLE_AO_STACK_STATUS',
         'AO_STACK_STATUS_URL',
-        'ACTIVATE_PYDANTIC_FORMS',
     ]);
 
     const graphqlEndpointCore = `${ORCHESTRATOR_GRAPHQL_HOST}${ORCHESTRATOR_GRAPHQL_PATH}`;
@@ -60,7 +58,5 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         supportMenuItemUrl: SUPPORT_MENU_ITEM_URL,
         enableAoStackStatus: ENABLE_AO_STACK_STATUS?.toLowerCase() === 'true',
         aoStackStatusUrl: AO_STACK_STATUS_URL,
-        activatePydanticForms:
-            ACTIVATE_PYDANTIC_FORMS?.toLowerCase() === 'true',
     };
 };
