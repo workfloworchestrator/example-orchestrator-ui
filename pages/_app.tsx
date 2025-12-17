@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+import _ from 'lodash';
 import { SessionProvider } from 'next-auth/react';
 import { NextAdapter } from 'next-query-params';
-import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
+import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { QueryParamProvider } from 'use-query-params';
@@ -20,10 +21,12 @@ import {
     WfoErrorBoundary,
     WfoErrorMonitoring,
     WfoErrorMonitoringProvider,
+    WfoLogoSpinner,
     WfoMenuItemLink,
     WfoPageTemplate,
     WfoToastsList,
     defaultOrchestratorTheme,
+    emptyOrchestratorConfig,
 } from '@orchestrator-ui/orchestrator-ui-components';
 
 import { getAppLogo } from '@/components/AppLogo/AppLogo';
@@ -34,12 +37,11 @@ import '../font/inter.css';
 
 type AppOwnProps = { orchestratorConfig: OrchestratorConfig };
 
-function CustomApp({
-    Component,
-    pageProps,
-    orchestratorConfig,
-}: AppProps & AppOwnProps) {
+function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
     const router = useRouter();
+    const { orchestratorConfig } = pageProps;
+    const [orchestratorLoadedConfig, setOrchestratorLoadedConfig] =
+        useState<OrchestratorConfig | null>(null);
 
     const [themeMode, setThemeMode] = useState<EuiThemeColorMode>(
         ColorModes.LIGHT,
@@ -62,6 +64,15 @@ function CustomApp({
         }
     }, []);
 
+    useEffect(() => {
+        if (
+            orchestratorConfig &&
+            !_.isEqual(orchestratorConfig, emptyOrchestratorConfig)
+        ) {
+            setOrchestratorLoadedConfig(orchestratorConfig);
+        }
+    }, [orchestratorConfig]);
+
     const addMenuItems = (
         defaultMenuItems: EuiSideNavItemType<object>[],
     ): EuiSideNavItemType<object>[] => [
@@ -81,7 +92,7 @@ function CustomApp({
         },
         {
             name: 'Search',
-            id: '10',
+            id: '20',
             isSelected: router.pathname === '/search',
             href: '/search',
             renderItem: () => (
@@ -94,7 +105,7 @@ function CustomApp({
         },
         {
             name: 'Agent',
-            id: '10',
+            id: '30',
             isSelected: router.pathname === '/agent',
             href: '/agent',
             renderItem: () => (
@@ -112,12 +123,16 @@ function CustomApp({
         reportMessage: () => {},
     };
 
+    if (!orchestratorLoadedConfig) return <WfoLogoSpinner />;
+
     return (
         <WfoErrorBoundary>
             <OrchestratorConfigProvider
-                initialOrchestratorConfig={orchestratorConfig}
+                initialOrchestratorConfig={orchestratorLoadedConfig}
             >
-                <StoreProvider initialOrchestratorConfig={orchestratorConfig}>
+                <StoreProvider
+                    initialOrchestratorConfig={orchestratorLoadedConfig}
+                >
                     <SessionProvider session={pageProps.session}>
                         <WfoErrorMonitoringProvider
                             errorMonitoringHandler={errorMonitoringHandler}
@@ -176,14 +191,18 @@ function CustomApp({
     );
 }
 
-CustomApp.getInitialProps = async (
-    context: AppContext,
-): Promise<AppOwnProps & AppInitialProps> => {
-    const ctx = await App.getInitialProps(context);
+CustomApp.getInitialProps = async (context: AppContext) => {
+    const isServerside = typeof window === 'undefined';
+    const appProps = await App.getInitialProps(context);
 
     return {
-        ...ctx,
-        orchestratorConfig: getInitialOrchestratorConfig(),
+        ...appProps,
+        pageProps: {
+            ...appProps.pageProps,
+            orchestratorConfig: isServerside
+                ? getInitialOrchestratorConfig()
+                : null,
+        },
     };
 };
 
