@@ -10,7 +10,6 @@ import { QueryParamProvider } from 'use-query-params';
 
 import type { EuiSideNavItemType } from '@elastic/eui';
 import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
-import { EuiThemeAmsterdam } from '@elastic/eui';
 import {
     ColorModes,
     ConfirmationDialogContextWrapper,
@@ -25,8 +24,8 @@ import {
     WfoMenuItemLink,
     WfoPageTemplate,
     WfoToastsList,
-    defaultOrchestratorTheme,
     emptyOrchestratorConfig,
+    wfoThemeModifications,
 } from '@orchestrator-ui/orchestrator-ui-components';
 
 import { getAppLogo } from '@/components/AppLogo/AppLogo';
@@ -139,9 +138,8 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                         >
                             <WfoAuth>
                                 <EuiProvider
-                                    theme={EuiThemeAmsterdam}
                                     colorMode={themeMode}
-                                    modify={defaultOrchestratorTheme}
+                                    modify={wfoThemeModifications}
                                 >
                                     <TranslationsProvider>
                                         <Head>
