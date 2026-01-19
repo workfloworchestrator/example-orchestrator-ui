@@ -13,10 +13,10 @@ export function getAppLogo(): ReactElement {
 
         return (
             <div css={logoStyle}>
-                <EuiText color={theme.colors.emptyShade} size="xs">
+                <EuiText color={theme.colors.ghost} size="xs">
                     Workflow
                 </EuiText>
-                <EuiText color={theme.colors.emptyShade} size="xs">
+                <EuiText color={theme.colors.ghost} size="xs">
                     Orchestrator
                 </EuiText>
             </div>

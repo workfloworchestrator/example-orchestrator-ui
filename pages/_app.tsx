@@ -8,9 +8,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { QueryParamProvider } from 'use-query-params';
 
-import type { EuiSideNavItemType } from '@elastic/eui';
+import { EuiSideNavItemType, EuiThemeColorMode } from '@elastic/eui';
 import { EuiProvider } from '@elastic/eui';
 import {
+    ColorModes,
     ConfirmationDialogContextWrapper,
     OrchestratorConfig,
     OrchestratorConfigProvider,
@@ -24,6 +25,7 @@ import {
     WfoPageTemplate,
     WfoToastsList,
     emptyOrchestratorConfig,
+    wfoThemeModifications,
 } from '@orchestrator-ui/orchestrator-ui-components';
 
 import { getAppLogo } from '@/components/AppLogo/AppLogo';
@@ -39,6 +41,7 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
     const { orchestratorConfig } = pageProps;
     const [orchestratorLoadedConfig, setOrchestratorLoadedConfig] =
         useState<OrchestratorConfig | null>(null);
+    const colorModeState = useState<EuiThemeColorMode>(ColorModes.LIGHT);
 
     useEffect(() => {
         if (
@@ -114,7 +117,10 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                             errorMonitoringHandler={errorMonitoringHandler}
                         >
                             <WfoAuth>
-                                <EuiProvider>
+                                <EuiProvider
+                                    colorMode={colorModeState[0]}
+                                    modify={wfoThemeModifications}
+                                >
                                     <TranslationsProvider>
                                         <Head>
                                             <link
@@ -133,12 +139,17 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                                                     overrideMenuItems={
                                                         addMenuItems
                                                     }
+                                                    colorModeState={
+                                                        colorModeState
+                                                    }
                                                 >
                                                     <QueryParamProvider
                                                         adapter={NextAdapter}
                                                         options={{
-                                                            removeDefaultsFromUrl: false,
-                                                            enableBatching: true,
+                                                            removeDefaultsFromUrl:
+                                                                false,
+                                                            enableBatching:
+                                                                true,
                                                         }}
                                                     >
                                                         <Component
