@@ -41,7 +41,7 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
     const { orchestratorConfig } = pageProps;
     const [orchestratorLoadedConfig, setOrchestratorLoadedConfig] =
         useState<OrchestratorConfig | null>(null);
-    const colorModeState = useState<EuiThemeColorMode>(ColorModes.LIGHT);
+    const [colorMode, setColorMode] = useState<EuiThemeColorMode>(ColorModes.LIGHT);
 
     useEffect(() => {
         if (
@@ -118,7 +118,7 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                         >
                             <WfoAuth>
                                 <EuiProvider
-                                    colorMode={colorModeState[0]}
+                                    colorMode={colorMode}
                                     modify={wfoThemeModifications}
                                 >
                                     <TranslationsProvider>
@@ -139,9 +139,10 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                                                     overrideMenuItems={
                                                         addMenuItems
                                                     }
-                                                    colorModeState={
-                                                        colorModeState
+                                                    colorMode={
+                                                        colorMode
                                                     }
+                                                    setColorMode={setColorMode}
                                                 >
                                                     <QueryParamProvider
                                                         adapter={NextAdapter}
