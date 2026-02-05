@@ -1,8 +1,8 @@
 import {
     Environment,
-    OrchestratorConfig,
     getEnvironmentVariables,
 } from '@orchestrator-ui/orchestrator-ui-components';
+import type { OrchestratorConfig } from '@orchestrator-ui/orchestrator-ui-components';
 
 export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
     const {

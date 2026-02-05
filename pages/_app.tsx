@@ -8,9 +8,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { QueryParamProvider } from 'use-query-params';
 
-import type { EuiSideNavItemType } from '@elastic/eui';
-import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
-import { EuiThemeAmsterdam } from '@elastic/eui';
+import { EuiSideNavItemType, EuiThemeColorMode } from '@elastic/eui';
+import { EuiProvider } from '@elastic/eui';
 import {
     ColorModes,
     ConfirmationDialogContextWrapper,
@@ -25,8 +24,8 @@ import {
     WfoMenuItemLink,
     WfoPageTemplate,
     WfoToastsList,
-    defaultOrchestratorTheme,
     emptyOrchestratorConfig,
+    wfoThemeModifications,
 } from '@orchestrator-ui/orchestrator-ui-components';
 
 import { getAppLogo } from '@/components/AppLogo/AppLogo';
@@ -42,27 +41,7 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
     const { orchestratorConfig } = pageProps;
     const [orchestratorLoadedConfig, setOrchestratorLoadedConfig] =
         useState<OrchestratorConfig | null>(null);
-
-    const [themeMode, setThemeMode] = useState<EuiThemeColorMode>(
-        ColorModes.LIGHT,
-    );
-
-    const handleThemeSwitch = (newThemeMode: EuiThemeColorMode) => {
-        setThemeMode(newThemeMode);
-        localStorage.setItem('themeMode', newThemeMode);
-    };
-
-    useEffect(() => {
-        // Initialize theme mode from localStorage or set it to 'light' if not present
-        const storedTheme = localStorage.getItem('themeMode');
-        if (
-            !storedTheme ||
-            (storedTheme !== ColorModes.LIGHT &&
-                storedTheme !== ColorModes.DARK)
-        ) {
-            handleThemeSwitch(ColorModes.LIGHT);
-        }
-    }, []);
+    const colorModeState = useState<EuiThemeColorMode>(ColorModes.LIGHT);
 
     useEffect(() => {
         if (
@@ -139,9 +118,8 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                         >
                             <WfoAuth>
                                 <EuiProvider
-                                    theme={EuiThemeAmsterdam}
-                                    colorMode={themeMode}
-                                    modify={defaultOrchestratorTheme}
+                                    colorMode={colorModeState[0]}
+                                    modify={wfoThemeModifications}
                                 >
                                     <TranslationsProvider>
                                         <Head>
@@ -158,11 +136,11 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                                             <ConfirmationDialogContextWrapper>
                                                 <WfoPageTemplate
                                                     getAppLogo={getAppLogo}
-                                                    onThemeSwitch={
-                                                        handleThemeSwitch
-                                                    }
                                                     overrideMenuItems={
                                                         addMenuItems
+                                                    }
+                                                    colorModeState={
+                                                        colorModeState
                                                     }
                                                 >
                                                     <QueryParamProvider
