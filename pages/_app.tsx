@@ -41,7 +41,9 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
     const { orchestratorConfig } = pageProps;
     const [orchestratorLoadedConfig, setOrchestratorLoadedConfig] =
         useState<OrchestratorConfig | null>(null);
-    const [colorMode, setColorMode] = useState<EuiThemeColorMode>(ColorModes.LIGHT);
+    const [colorMode, setColorMode] = useState<EuiThemeColorMode>(
+        ColorModes.LIGHT,
+    );
 
     useEffect(() => {
         if (
@@ -139,9 +141,7 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                                                     overrideMenuItems={
                                                         addMenuItems
                                                     }
-                                                    colorMode={
-                                                        colorMode
-                                                    }
+                                                    colorMode={colorMode}
                                                     setColorMode={setColorMode}
                                                 >
                                                     <QueryParamProvider
