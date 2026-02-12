@@ -1,8 +1,8 @@
 import {
     Environment,
+    OrchestratorConfig,
     getEnvironmentVariables,
 } from '@orchestrator-ui/orchestrator-ui-components';
-import type { OrchestratorConfig } from '@orchestrator-ui/orchestrator-ui-components';
 
 export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
     const {
@@ -21,6 +21,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         SUPPORT_MENU_ITEM_URL,
         ENABLE_AO_STACK_STATUS,
         AO_STACK_STATUS_URL,
+        START_WORKFLOW_FILTERS,
     } = getEnvironmentVariables([
         'USE_THEME_TOGGLE',
         'ENVIRONMENT_NAME',
@@ -37,10 +38,14 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         'SUPPORT_MENU_ITEM_URL',
         'ENABLE_AO_STACK_STATUS',
         'AO_STACK_STATUS_URL',
+        'START_WORKFLOW_FILTERS',
     ]);
 
     const graphqlEndpointCore = `${ORCHESTRATOR_GRAPHQL_HOST}${ORCHESTRATOR_GRAPHQL_PATH}`;
     const orchestratorApiBaseUrl = `${ORCHESTRATOR_API_HOST}${ORCHESTRATOR_API_PATH}`;
+    const startWorkflowFilters = START_WORKFLOW_FILTERS?.trim()
+        ? START_WORKFLOW_FILTERS.replaceAll('_', ' ').split('|')
+        : undefined;
 
     return {
         orchestratorApiBaseUrl,
@@ -58,5 +63,6 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         supportMenuItemUrl: SUPPORT_MENU_ITEM_URL,
         enableAoStackStatus: ENABLE_AO_STACK_STATUS?.toLowerCase() === 'true',
         aoStackStatusUrl: AO_STACK_STATUS_URL,
+        startWorkflowFilters,
     };
 };
