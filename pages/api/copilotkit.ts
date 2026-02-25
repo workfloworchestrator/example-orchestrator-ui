@@ -30,6 +30,7 @@ export default async function copilotHandler(
 
     const runtime = new CopilotRuntime({
         agents: {
+            // @ts-expect-error 25-2-26: This a mismactch between the latest copilot-runtime and ag-ui/client. There is a fix upstream in coplit-runtime that will be release soon.
             query_agent: new HttpAgent({
                 url:
                     process.env.AGENT_URL || 'http://localhost:8080/api/agent/',
