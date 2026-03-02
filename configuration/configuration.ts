@@ -58,5 +58,6 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         supportMenuItemUrl: SUPPORT_MENU_ITEM_URL,
         enableAoStackStatus: ENABLE_AO_STACK_STATUS?.toLowerCase() === 'true',
         aoStackStatusUrl: AO_STACK_STATUS_URL,
+        startWorkflowFilters: undefined,
     };
 };
