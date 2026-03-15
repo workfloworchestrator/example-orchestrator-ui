@@ -14,10 +14,10 @@
         "postinstall": "husky"
     },
     "dependencies": {
-        "@copilotkit/react-core": "1.10.6",
-        "@copilotkit/react-textarea": "1.10.6",
-        "@copilotkit/react-ui": "1.10.6",
-        "@copilotkit/runtime": "1.10.6",
+        "@copilotkit/react-core": "1.54.0",
+        "@copilotkit/react-textarea": "1.54.0",
+        "@copilotkit/react-ui": "1.54.0",
+        "@copilotkit/runtime": "1.54.0",
         "@elastic/charts": "^71.1.2",
         "@elastic/datemath": "^5.0.3",
         "@elastic/eui": "^113.1.0",
