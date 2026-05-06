@@ -7,5 +7,5 @@ module.exports = {
         locales: ['en-GB', 'nl-NL'],
         defaultLocale: 'en-GB',
     },
-    transpilePackages: ['@orchestrator-ui/orchestrator-ui-components', '@copilotkit/react-core'],
+    transpilePackages: ['@copilotkit/react-core'],
 };
