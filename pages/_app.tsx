@@ -8,8 +8,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { QueryParamProvider } from 'use-query-params';
 
-import { EuiSideNavItemType, EuiThemeColorMode } from '@elastic/eui';
-import { EuiProvider } from '@elastic/eui';
+import { EuiProvider, EuiSideNavItemType, EuiThemeColorMode } from '@elastic/eui';
 import {
     ColorModes,
     ConfirmationDialogContextWrapper,
