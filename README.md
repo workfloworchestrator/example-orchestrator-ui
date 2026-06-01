@@ -54,16 +54,18 @@ Orchestrator backend (REST + GraphQL + optional WebSocket).
 
 ## Architecture
 
-```
-┌──────────────────────────────┐        REST + GraphQL (+ WS)
-│   example-orchestrator-ui    │ ──────────────────────────────▶ Workflow
-│   (Next.js 15, pages router) │                                 Orchestrator
-└──────────────┬───────────────┘                                  (backend)
-               │
-               │  /api/auth/*  ─── NextAuth (OIDC provider)
-               │  /api/copilotkit ─ CopilotKit runtime ──▶ Agent (AG-UI HTTP)
-               ▼
-        Browser (Elastic EUI)
+```mermaid
+flowchart LR
+    Browser["Browser<br/>(Elastic EUI)"]
+    UI["example-orchestrator-ui<br/>Next.js 15 · pages router"]
+    Backend["Workflow Orchestrator<br/>(REST + GraphQL + WebSocket)"]
+    OIDC["OIDC Provider<br/>(e.g. Keycloak)"]
+    Agent["Agent<br/>(AG-UI HTTP)"]
+
+    Browser <--> UI
+    UI -->|REST + GraphQL + WS| Backend
+    UI -->|/api/auth/* · NextAuth| OIDC
+    UI -->|/api/copilotkit · CopilotKit runtime| Agent
 ```
 
 The application is intentionally thin: nearly all screens come from
