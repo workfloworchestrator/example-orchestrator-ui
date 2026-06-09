@@ -62,19 +62,6 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
     ): EuiSideNavItemType<object>[] => [
         ...defaultMenuItems,
         {
-            name: 'Example form',
-            id: '10',
-            isSelected: router.pathname === '/example-form',
-            href: '/example-form',
-            renderItem: () => (
-                <WfoMenuItemLink
-                    path={'/example-form'}
-                    translationString="Example form"
-                    isSelected={router.pathname === '/example-form'}
-                />
-            ),
-        },
-        {
             name: 'Search',
             id: '20',
             isSelected: router.pathname === '/search',
@@ -86,20 +73,7 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                     isSelected={router.pathname === '/search'}
                 />
             ),
-        },
-        {
-            name: 'Agent',
-            id: '30',
-            isSelected: router.pathname === '/agent',
-            href: '/agent',
-            renderItem: () => (
-                <WfoMenuItemLink
-                    path={'/agent'}
-                    translationString="Agent"
-                    isSelected={router.pathname === '/agent'}
-                />
-            ),
-        },
+        }
     ];
 
     const errorMonitoringHandler: WfoErrorMonitoring | undefined = {
