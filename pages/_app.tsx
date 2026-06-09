@@ -73,7 +73,7 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                     isSelected={router.pathname === '/search'}
                 />
             ),
-        }
+        },
     ];
 
     const errorMonitoringHandler: WfoErrorMonitoring | undefined = {
