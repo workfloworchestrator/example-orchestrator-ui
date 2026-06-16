@@ -44,7 +44,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
     const graphqlEndpointCore = `${ORCHESTRATOR_GRAPHQL_HOST}${ORCHESTRATOR_GRAPHQL_PATH}`;
     const orchestratorApiBaseUrl = `${ORCHESTRATOR_API_HOST}${ORCHESTRATOR_API_PATH}`;
     const startWorkflowFilters = START_WORKFLOW_FILTERS?.trim()
-        ? START_WORKFLOW_FILTERS.replaceAll('_', ' ').split('|')
+        ? START_WORKFLOW_FILTERS.split('|')
         : undefined;
 
     return {
