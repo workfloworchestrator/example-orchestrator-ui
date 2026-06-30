@@ -16,6 +16,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         USE_WEB_SOCKETS,
         WORKFLOW_INFORMATION_LINK_URL,
         SHOW_WORKFLOW_INFORMATION_LINK,
+        SHOW_WORKFLOW_USER_GUIDE,
         OAUTH2_ACTIVE,
         ENABLE_SUPPORT_MENU_ITEM,
         SUPPORT_MENU_ITEM_URL,
@@ -33,6 +34,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         'USE_WEB_SOCKETS',
         'WORKFLOW_INFORMATION_LINK_URL',
         'SHOW_WORKFLOW_INFORMATION_LINK',
+        'SHOW_WORKFLOW_USER_GUIDE',
         'OAUTH2_ACTIVE',
         'ENABLE_SUPPORT_MENU_ITEM',
         'SUPPORT_MENU_ITEM_URL',
@@ -58,6 +60,8 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         workflowInformationLinkUrl: WORKFLOW_INFORMATION_LINK_URL,
         showWorkflowInformationLink:
             SHOW_WORKFLOW_INFORMATION_LINK?.toLowerCase() === 'true',
+        showWorkflowUserGuide:
+            SHOW_WORKFLOW_USER_GUIDE?.toLowerCase() === 'true',
         enableSupportMenuItem:
             ENABLE_SUPPORT_MENU_ITEM?.toLowerCase() === 'true',
         supportMenuItemUrl: SUPPORT_MENU_ITEM_URL,
