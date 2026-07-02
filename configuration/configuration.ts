@@ -22,6 +22,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         ENABLE_AO_STACK_STATUS,
         AO_STACK_STATUS_URL,
         START_WORKFLOW_FILTERS,
+        SHOW_WORKFLOW_USER_GUIDE,
     } = getEnvironmentVariables([
         'USE_THEME_TOGGLE',
         'ENVIRONMENT_NAME',
@@ -39,6 +40,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         'ENABLE_AO_STACK_STATUS',
         'AO_STACK_STATUS_URL',
         'START_WORKFLOW_FILTERS',
+        'SHOW_WORKFLOW_USER_GUIDE',
     ]);
 
     const graphqlEndpointCore = `${ORCHESTRATOR_GRAPHQL_HOST}${ORCHESTRATOR_GRAPHQL_PATH}`;
@@ -64,5 +66,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         enableAoStackStatus: ENABLE_AO_STACK_STATUS?.toLowerCase() === 'true',
         aoStackStatusUrl: AO_STACK_STATUS_URL,
         startWorkflowFilters,
+        showWorkflowUserGuide:
+            SHOW_WORKFLOW_USER_GUIDE?.toLowerCase() === 'true',
     };
 };
