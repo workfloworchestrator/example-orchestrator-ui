@@ -59,12 +59,10 @@ flowchart LR
     UI["example-orchestrator-ui<br/>Next.js 15 · pages router"]
     Backend["Workflow Orchestrator<br/>(REST + GraphQL + WebSocket)"]
     OIDC["OIDC Provider<br/>(e.g. Keycloak)"]
-    Agent["Agent<br/>(AG-UI HTTP)"]
 
     Browser <--> UI
     UI -->|REST + GraphQL + WS| Backend
     UI -->|/api/auth/* · NextAuth| OIDC
-    UI -->|/api/copilotkit · CopilotKit runtime| Agent
 ```
 
 The application is intentionally thin: nearly all screens come from
@@ -165,21 +163,6 @@ state checks are enabled, and access tokens are refreshed automatically.
 | `AO_STACK_STATUS_URL`            | Endpoint that the stack-status widget polls.                                                                              |
 | `START_WORKFLOW_FILTERS`         | Pipe-separated list of workflow categories to expose on the start page. Underscores are converted to spaces, e.g. `Create | Modify | Terminate`. |
 
-### Agent (CopilotKit)
-
-The `/agent` page is a [CopilotKit](https://copilotkit.ai/) chat UI bound
-to a single agent named `query_agent`. The runtime route at
-`pages/api/copilotkit.ts` proxies to an upstream AG-UI HTTP agent,
-forwarding the user's OIDC access token as a `Bearer` header.
-
-| Variable    | Description                                                                         |
-| ----------- | ----------------------------------------------------------------------------------- |
-| `AGENT_URL` | Upstream agent endpoint. Defaults to `http://localhost:8080/api/agent/` if not set. |
-
-If you don't need the agent, simply remove the menu entry from
-`pages/_app.tsx` and delete `pages/agent.tsx` +
-`pages/api/copilotkit.ts`.
-
 ## Project layout
 
 ```
@@ -189,7 +172,6 @@ If you don't need the agent, simply remove the menu entry from
 ├── pages/                     # Next.js routes (pages router)
 │   ├── _app.tsx               # providers, menu, auth wiring
 │   ├── index.tsx              # WfoStartPage
-│   ├── agent.tsx              # CopilotKit chat page
 │   ├── search.tsx
 │   ├── settings.tsx
 │   ├── subscriptions/         # list + detail
@@ -197,8 +179,7 @@ If you don't need the agent, simply remove the menu entry from
 │   ├── tasks/                 # list, detail, "new"
 │   ├── metadata/              # products, product blocks, resource types, tasks, …
 │   └── api/
-│       ├── auth/[...nextauth].ts   # NextAuth + OIDC provider
-│       └── copilotkit.ts           # CopilotKit runtime → AG-UI agent
+│       └── auth/[...nextauth].ts   # NextAuth + OIDC provider
 ├── translations/              # en-GB / nl-NL message catalogs + provider
 ├── font/                      # Inter web font
 ├── public/                    # static assets (favicon, etc.)
@@ -228,15 +209,12 @@ This makes it easy to override individual screens by editing one file.
 
 The side navigation is configured in `pages/_app.tsx` via the
 `overrideMenuItems` prop on `<WfoPageTemplate>`. The reference
-implementation adds three extra entries — `Example form`, `Search`, and
-`Agent` — by appending to the default menu items:
+implementation add an extra entries `Search` by appending to the default menu items:
 
 ```tsx
 const addMenuItems = (defaultMenuItems) => [
     ...defaultMenuItems,
-    { name: 'Example form', id: '10', href: '/example-form' /* … */ },
     { name: 'Search', id: '20', href: '/search' /* … */ },
-    { name: 'Agent', id: '30', href: '/agent' /* … */ },
 ];
 ```
 
