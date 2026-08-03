@@ -21,16 +21,16 @@ Orchestrator backend (REST + GraphQL + optional WebSocket).
 - [Prerequisites](#prerequisites)
 - [Quick start](#quick-start)
 - [Configuration](#configuration)
-  - [Backend connection](#backend-connection)
-  - [Authentication (OAuth2 / OIDC)](#authentication-oauth2--oidc)
-  - [UI feature toggles](#ui-feature-toggles)
-  - [Agent (CopilotKit)](#agent-copilotkit)
+    - [Backend connection](#backend-connection)
+    - [Authentication (OAuth2 / OIDC)](#authentication-oauth2--oidc)
+    - [UI feature toggles](#ui-feature-toggles)
+    - [Agent (CopilotKit)](#agent-copilotkit)
 - [Project layout](#project-layout)
 - [Customization](#customization)
-  - [Navigation & menu items](#navigation--menu-items)
-  - [Branding (logo)](#branding-logo)
-  - [Translations](#translations)
-  - [Adding pages](#adding-pages)
+    - [Navigation & menu items](#navigation--menu-items)
+    - [Branding (logo)](#branding-logo)
+    - [Translations](#translations)
+    - [Adding pages](#adding-pages)
 - [npm scripts](#npm-scripts)
 - [Building & deploying](#building--deploying)
 - [Local Keycloak for OAuth testing](#local-keycloak-for-oauth-testing)
@@ -45,8 +45,7 @@ Orchestrator backend (REST + GraphQL + optional WebSocket).
 
 - Minimal reference integration with Workflow Orchestrator, with sensible defaults
 - Subscription, workflow, task and metadata management pages
-- Built-in pages for **search**, an **example form**, and a CopilotKit
-  **agent** chat
+- Built-in pages for **search**
 - OAuth2 / OIDC login via NextAuth with refresh-token rotation
 - Internationalization: `en-GB` (default) and `nl-NL`, both extensible
 - Theme toggle (light / dark) and per-environment banners
@@ -136,17 +135,17 @@ Authentication is handled by [NextAuth](https://next-auth.js.org/) with
 a generic OIDC provider configured from the `wellKnown` URL. PKCE +
 state checks are enabled, and access tokens are refreshed automatically.
 
-| Variable                                | Description                                                             |
-| --------------------------------------- | ----------------------------------------------------------------------- |
-| `OAUTH2_ACTIVE`                         | Set to `false` to disable login entirely (handy for local dev).         |
-| `OAUTH2_CLIENT_ID`                      | OAuth2 client ID.                                                       |
-| `OAUTH2_CLIENT_SECRET`                  | Optional. Omit for public/PKCE-only clients.                            |
-| `OIDC_CONF_FULL_WELL_KNOWN_URL`         | Full URL to the OIDC `.well-known/openid-configuration` document.       |
-| `NEXTAUTH_PROVIDER_ID`                  | Internal NextAuth provider id (e.g. `keycloak`).                        |
-| `NEXTAUTH_PROVIDER_NAME`                | Human-readable name shown on the sign-in screen.                        |
-| `NEXTAUTH_AUTHORIZATION_SCOPE_OVERRIDE` | Optional. Override the requested scopes (default: `openid profile`).    |
-| `NEXTAUTH_SECRET`                       | Standard NextAuth secret for signing session tokens (required in prod). |
-| `NEXTAUTH_URL`                          | Public base URL of the deployed UI (required by NextAuth in production).|
+| Variable                                | Description                                                              |
+| --------------------------------------- | ------------------------------------------------------------------------ |
+| `OAUTH2_ACTIVE`                         | Set to `false` to disable login entirely (handy for local dev).          |
+| `OAUTH2_CLIENT_ID`                      | OAuth2 client ID.                                                        |
+| `OAUTH2_CLIENT_SECRET`                  | Optional. Omit for public/PKCE-only clients.                             |
+| `OIDC_CONF_FULL_WELL_KNOWN_URL`         | Full URL to the OIDC `.well-known/openid-configuration` document.        |
+| `NEXTAUTH_PROVIDER_ID`                  | Internal NextAuth provider id (e.g. `keycloak`).                         |
+| `NEXTAUTH_PROVIDER_NAME`                | Human-readable name shown on the sign-in screen.                         |
+| `NEXTAUTH_AUTHORIZATION_SCOPE_OVERRIDE` | Optional. Override the requested scopes (default: `openid profile`).     |
+| `NEXTAUTH_SECRET`                       | Standard NextAuth secret for signing session tokens (required in prod).  |
+| `NEXTAUTH_URL`                          | Public base URL of the deployed UI (required by NextAuth in production). |
 
 > **Heads up:** several auth env vars were renamed in commit `edec88c`.
 > See [`breaking-changes.md`](./breaking-changes.md) if you're upgrading
@@ -154,17 +153,17 @@ state checks are enabled, and access tokens are refreshed automatically.
 
 ### UI feature toggles
 
-| Variable                         | Description                                                               |
-| -------------------------------- | ------------------------------------------------------------------------- |
-| `ENVIRONMENT_NAME`               | Label shown in the top bar (e.g. `DEVELOPMENT`, `STAGING`, `PRODUCTION`). |
-| `USE_THEME_TOGGLE`               | `true` to show the light/dark theme switcher.                             |
-| `SHOW_WORKFLOW_INFORMATION_LINK` | `true` to show a "more info" link on workflow pages.                      |
-| `WORKFLOW_INFORMATION_LINK_URL`  | Target URL of that link.                                                  |
-| `ENABLE_SUPPORT_MENU_ITEM`       | `true` to add a "Support" menu item.                                      |
-| `SUPPORT_MENU_ITEM_URL`          | Target URL for the support menu item.                                     |
-| `ENABLE_AO_STACK_STATUS`         | `true` to show the AO-stack status indicator.                             |
-| `AO_STACK_STATUS_URL`            | Endpoint that the stack-status widget polls.                              |
-| `START_WORKFLOW_FILTERS`         | Pipe-separated list of workflow categories to expose on the start page. Underscores are converted to spaces, e.g. `Create|Modify|Terminate`. |
+| Variable                         | Description                                                                                                               |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
+| `ENVIRONMENT_NAME`               | Label shown in the top bar (e.g. `DEVELOPMENT`, `STAGING`, `PRODUCTION`).                                                 |
+| `USE_THEME_TOGGLE`               | `true` to show the light/dark theme switcher.                                                                             |
+| `SHOW_WORKFLOW_INFORMATION_LINK` | `true` to show a "more info" link on workflow pages.                                                                      |
+| `WORKFLOW_INFORMATION_LINK_URL`  | Target URL of that link.                                                                                                  |
+| `ENABLE_SUPPORT_MENU_ITEM`       | `true` to add a "Support" menu item.                                                                                      |
+| `SUPPORT_MENU_ITEM_URL`          | Target URL for the support menu item.                                                                                     |
+| `ENABLE_AO_STACK_STATUS`         | `true` to show the AO-stack status indicator.                                                                             |
+| `AO_STACK_STATUS_URL`            | Endpoint that the stack-status widget polls.                                                                              |
+| `START_WORKFLOW_FILTERS`         | Pipe-separated list of workflow categories to expose on the start page. Underscores are converted to spaces, e.g. `Create | Modify | Terminate`. |
 
 ### Agent (CopilotKit)
 
@@ -215,6 +214,7 @@ Most pages are one-liners that delegate to a component from
 ```tsx
 // pages/search.tsx
 import { WfoSearch } from '@orchestrator-ui/orchestrator-ui-components';
+
 export default function SearchPage() {
     return <WfoSearch />;
 }
@@ -234,9 +234,9 @@ implementation adds three extra entries — `Example form`, `Search`, and
 ```tsx
 const addMenuItems = (defaultMenuItems) => [
     ...defaultMenuItems,
-    { name: 'Example form', id: '10', href: '/example-form', /* … */ },
-    { name: 'Search',       id: '20', href: '/search',       /* … */ },
-    { name: 'Agent',        id: '30', href: '/agent',        /* … */ },
+    { name: 'Example form', id: '10', href: '/example-form' /* … */ },
+    { name: 'Search', id: '20', href: '/search' /* … */ },
+    { name: 'Agent', id: '30', href: '/agent' /* … */ },
 ];
 ```
 
@@ -275,16 +275,16 @@ entry to `addMenuItems` in `pages/_app.tsx`.
 
 ## npm scripts
 
-| Command                | Purpose                                         |
-| ---------------------- | ----------------------------------------------- |
-| `npm run dev`          | Start the Next.js dev server on port 3000.      |
-| `npm run build`        | Production build (emits standalone output).     |
-| `npm start`            | Serve the production build.                     |
-| `npm run tsc`          | Type-check the project without emitting.       |
-| `npm run lint`         | Run ESLint.                                     |
-| `npm run prettier`     | Check formatting.                               |
-| `npm run prettier-fix` | Apply Prettier formatting.                      |
-| `npm test`             | Run Jest (passes with no tests).                |
+| Command                | Purpose                                     |
+| ---------------------- | ------------------------------------------- |
+| `npm run dev`          | Start the Next.js dev server on port 3000.  |
+| `npm run build`        | Production build (emits standalone output). |
+| `npm start`            | Serve the production build.                 |
+| `npm run tsc`          | Type-check the project without emitting.    |
+| `npm run lint`         | Run ESLint.                                 |
+| `npm run prettier`     | Check formatting.                           |
+| `npm run prettier-fix` | Apply Prettier formatting.                  |
+| `npm test`             | Run Jest (passes with no tests).            |
 
 A Husky `postinstall` hook is registered for pre-commit checks.
 
