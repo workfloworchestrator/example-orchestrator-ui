@@ -5,7 +5,7 @@ our [component library repository][https://github.com/workfloworchestrator/orche
 library that the example app downloads form NPM is fixed in package-lock.json. When a new version of any of the `@orchestrator-ui/...` namespace packages
 is available this repository needs to be explicitly updated.
 
-When a new npm version is released from the component library repository a webhook is called that triggers a workflow that updates the packages in this repo.
+When a new package version is released from the component library repository to npm, a webhook is called that triggers a workflow that updates the packages in this repo.
 This way they should stay aligned. In some cases the component library needs an accompanying change in this repository to build correctly. In that case
 the automatic update fails to merge and a manual fix is needed.
 

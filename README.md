@@ -209,7 +209,7 @@ This makes it easy to override individual screens by editing one file.
 
 The side navigation is configured in `pages/_app.tsx` via the
 `overrideMenuItems` prop on `<WfoPageTemplate>`. The reference
-implementation add an extra entries `Search` by appending to the default menu items:
+implementation adds an extra entry — `Search` — by appending to the default menu items:
 
 ```tsx
 const addMenuItems = (defaultMenuItems) => [

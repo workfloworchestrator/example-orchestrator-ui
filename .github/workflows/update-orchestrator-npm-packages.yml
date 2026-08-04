@@ -40,5 +40,6 @@ jobs:
           git add package.json package-lock.json
           git commit -m "Update orchestrator-ui npm packages to latest versions"
           git checkout main
-          git merge update-to-latest-npm-versions
+          git pull --ff-only origin main
+          git merge --ff-only update-to-latest-npm-versions
           git push origin main
