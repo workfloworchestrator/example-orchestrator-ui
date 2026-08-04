@@ -1,0 +1,44 @@
+name: Update orchestrator npm packages
+on:
+  repository_dispatch:
+    types: [update-orchestrator-npm-packages]
+
+permissions:
+  contents: write
+
+jobs:
+  update-npm-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+      - name: Upgrade npm to 11.x
+        run: npm install -g npm@11
+      - name: Create update branch from main
+        run: git checkout -b update-to-latest-npm-versions
+      - name: Installing dependencies
+        run: npm ci
+      - name: Update orchestrator-ui packages
+        run: ./update-orchestrator-ui-components.sh
+      - run: npm run lint
+      - run: npm run tsc
+      - run: npm run test
+      - name: Merge branch back to main
+        run: |
+          if git diff --quiet package.json package-lock.json; then
+            echo "Packages already at latest versions, nothing to merge"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "Update orchestrator-ui npm packages to latest versions"
+          git checkout main
+          git merge update-to-latest-npm-versions
+          git push origin main
