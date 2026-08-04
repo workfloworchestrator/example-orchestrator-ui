@@ -1,7 +1,7 @@
 ## Updating library version in package-lock.json.
 
-The version of dependency `@orchestrator-ui/orchestrator-ui-components` is set to `*`. This is needed for proper usage in our Turborepo setup in 
-our [component library repository][https://github.com/workfloworchestrator/orchestrator-ui-library/]. The current version of the component 
+The version of dependency `@orchestrator-ui/orchestrator-ui-components` is set to `*`. This is needed for proper usage in our Turborepo setup in
+our [component library repository][https://github.com/workfloworchestrator/orchestrator-ui-library/]. The current version of the component
 library that the example app downloads form NPM is fixed in package-lock.json. When a new version of any of the `@orchestrator-ui/...` namespace packages
 is available this repository needs to be explicitly updated.
 
@@ -14,6 +14,6 @@ To manually update the versions use `update-orchestrator-ui-components.sh` or ru
 ```bash
 npm update @orchestrator-ui/orchestrator-ui-components
 npm update @orchestrator-ui/eslint-config-custom
-npm update @orchestrator-ui/jest-config 
+npm update @orchestrator-ui/jest-config
 npm update @orchestrator-ui/tsconfig
 ```
