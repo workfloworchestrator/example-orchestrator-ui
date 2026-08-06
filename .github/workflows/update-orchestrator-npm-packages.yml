@@ -5,6 +5,11 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-orchestrator-npm-packages
+  cancel-in-progress: true
 
 jobs:
   update-npm-packages:
@@ -20,8 +25,6 @@ jobs:
           cache: 'npm'
       - name: Upgrade npm to 11.x
         run: npm install -g npm@11
-      - name: Create update branch from main
-        run: git checkout -b update-to-latest-npm-versions
       - name: Installing dependencies
         run: npm ci
       - name: Update orchestrator-ui packages
@@ -29,17 +32,13 @@ jobs:
       - run: npm run lint
       - run: npm run tsc
       - run: npm run test
-      - name: Merge branch back to main
-        run: |
-          if git diff --quiet package.json package-lock.json; then
-            echo "Packages already at latest versions, nothing to merge"
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package.json package-lock.json
-          git commit -m "Update orchestrator-ui npm packages to latest versions"
-          git checkout main
-          git pull --ff-only origin main
-          git merge --ff-only update-to-latest-npm-versions
-          git push origin main
+      - run: npm run build
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: update-orchestrator-ui-components
+          title: 'Update orchestrator-ui npm packages to latest versions'
+          commit-message: 'Update orchestrator-ui npm packages to latest versions'
+          body: 'Automated update triggered by a new component-library release.'
+          delete-branch: true
+
