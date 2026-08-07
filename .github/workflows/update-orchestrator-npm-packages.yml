@@ -1,0 +1,44 @@
+name: Update orchestrator npm packages
+on:
+  repository_dispatch:
+    types: [update-orchestrator-npm-packages]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-orchestrator-npm-packages
+  cancel-in-progress: true
+
+jobs:
+  update-npm-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+      - name: Upgrade npm to 11.x
+        run: npm install -g npm@11
+      - name: Installing dependencies
+        run: npm ci
+      - name: Update orchestrator-ui packages
+        run: ./update-orchestrator-ui-components.sh
+      - run: npm run lint
+      - run: npm run tsc
+      - run: npm run test
+      - run: npm run build
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: update-orchestrator-ui-components
+          title: 'Update orchestrator-ui npm packages to latest versions'
+          commit-message: 'Update orchestrator-ui npm packages to latest versions'
+          body: 'Automated update triggered by a new component-library release.'
+          delete-branch: true
+
