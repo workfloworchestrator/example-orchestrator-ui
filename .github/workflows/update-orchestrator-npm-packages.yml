@@ -2,7 +2,7 @@ name: Update orchestrator npm packages
 on:
   repository_dispatch:
     types: [update-orchestrator-npm-packages]
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 permissions:
   contents: write
