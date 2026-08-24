@@ -30,6 +30,17 @@ jobs:
         run: npm ci
       - name: Update orchestrator-ui packages
         run: ./update-orchestrator-ui-components.sh
+      - name: Get updated package versions
+        id: versions
+        run: |
+          echo "components=$(node -p "require('./node_modules/@orchestrator-ui/orchestrator-ui-components/package.json').version")" >> "$GITHUB_OUTPUT"
+          {
+            echo 'list<<EOF'
+            for pkg in @orchestrator-ui/orchestrator-ui-components @orchestrator-ui/eslint-config-custom @orchestrator-ui/jest-config @orchestrator-ui/tsconfig; do
+              echo "- \`${pkg}@$(node -p "require('./node_modules/${pkg}/package.json').version")\`"
+            done
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
       - run: npm run lint
       - run: npm run tsc
       - run: npm run test
@@ -38,7 +49,11 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           branch: update-orchestrator-ui-components
-          title: 'Update orchestrator-ui npm packages to latest versions'
-          commit-message: 'Update orchestrator-ui npm packages to latest versions'
-          body: 'Automated update triggered by a new component-library release.'
+          title: 'Update orchestrator-ui npm packages to ${{ steps.versions.outputs.components }}'
+          commit-message: 'Update orchestrator-ui npm packages to ${{ steps.versions.outputs.components }}'
+          body: |
+            Automated update triggered by a new component-library release.
+
+            Updated packages:
+            ${{ steps.versions.outputs.list }}
           delete-branch: true
