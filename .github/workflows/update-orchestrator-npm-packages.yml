@@ -6,7 +6,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
+ cl pull-requests: write
 
 concurrency:
   group: update-orchestrator-npm-packages
