@@ -1,6 +1,6 @@
 import NextAuth, { AuthOptions } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
-import { OAuthConfig } from 'next-auth/providers';
+import { OAuthConfig } from 'next-auth/providers/oauth';
 
 import {
     WfoSession,
