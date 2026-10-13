@@ -18,6 +18,7 @@ import {
     ConfirmationDialogContextWrapper,
     OrchestratorConfig,
     OrchestratorConfigProvider,
+    PATH_WORKFLOW_DESIGNER,
     StoreProvider,
     WfoAuth,
     WfoErrorBoundary,
@@ -71,6 +72,21 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                     path={'/search'}
                     translationString="Search"
                     isSelected={router.pathname === '/search'}
+                />
+            ),
+        },
+        {
+            name: 'Workflow designer',
+            id: '21',
+            isSelected: router.pathname.startsWith(PATH_WORKFLOW_DESIGNER),
+            href: PATH_WORKFLOW_DESIGNER,
+            renderItem: () => (
+                <WfoMenuItemLink
+                    path={PATH_WORKFLOW_DESIGNER}
+                    translationString="workflowDesigner"
+                    isSelected={router.pathname.startsWith(
+                        PATH_WORKFLOW_DESIGNER,
+                    )}
                 />
             ),
         },
