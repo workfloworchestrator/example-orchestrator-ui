@@ -151,17 +151,17 @@ state checks are enabled, and access tokens are refreshed automatically.
 
 ### UI feature toggles
 
-| Variable                         | Description                                                                                                               |
+| Variable | Description |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
-| `ENVIRONMENT_NAME`               | Label shown in the top bar (e.g. `DEVELOPMENT`, `STAGING`, `PRODUCTION`).                                                 |
-| `USE_THEME_TOGGLE`               | `true` to show the light/dark theme switcher.                                                                             |
-| `SHOW_WORKFLOW_INFORMATION_LINK` | `true` to show a "more info" link on workflow pages.                                                                      |
-| `WORKFLOW_INFORMATION_LINK_URL`  | Target URL of that link.                                                                                                  |
-| `ENABLE_SUPPORT_MENU_ITEM`       | `true` to add a "Support" menu item.                                                                                      |
-| `SUPPORT_MENU_ITEM_URL`          | Target URL for the support menu item.                                                                                     |
-| `ENABLE_AO_STACK_STATUS`         | `true` to show the AO-stack status indicator.                                                                             |
-| `AO_STACK_STATUS_URL`            | Endpoint that the stack-status widget polls.                                                                              |
-| `START_WORKFLOW_FILTERS`         | Pipe-separated list of workflow categories to expose on the start page. Underscores are converted to spaces, e.g. `Create | Modify | Terminate`. |
+| `ENVIRONMENT_NAME` | Label shown in the top bar (e.g. `DEVELOPMENT`, `STAGING`, `PRODUCTION`). |
+| `USE_THEME_TOGGLE` | `true` to show the light/dark theme switcher. |
+| `SHOW_WORKFLOW_INFORMATION_LINK` | `true` to show a "more info" link on workflow pages. |
+| `WORKFLOW_INFORMATION_LINK_URL` | Target URL of that link. |
+| `ENABLE_SUPPORT_MENU_ITEM` | `true` to add a "Support" menu item. |
+| `SUPPORT_MENU_ITEM_URL` | Target URL for the support menu item. |
+| `ENABLE_AO_STACK_STATUS` | `true` to show the AO-stack status indicator. |
+| `AO_STACK_STATUS_URL` | Endpoint that the stack-status widget polls. |
+| `START_WORKFLOW_FILTERS` | Pipe-separated list of workflow categories to expose on the start page. Underscores are converted to spaces, e.g. `Create | Modify | Terminate`. |
 
 ## Project layout
 
