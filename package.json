@@ -16,14 +16,16 @@
     "dependencies": {
         "@elastic/charts": "^73.2.1",
         "@elastic/datemath": "^5.0.3",
-        "@elastic/eui": "^122.1.0",
+        "@elastic/eui": "catalog:",
         "@emotion/css": "^11.11.2",
         "@emotion/react": "^11.11.1",
         "@orchestrator-ui/orchestrator-ui-components": "*",
         "@reduxjs/toolkit": "^2.9.0",
         "eslint": "^10.0.2",
+        "lodash": "^4.18.1",
         "moment": "^2.29.4",
-        "next": "^16.3.5",
+        "next": "catalog:",
+        "next-auth": "^4.24.15",
         "next-intl": "^4.14.6",
         "next-query-params": "^5.0.0",
         "process": "0.11.10",
@@ -39,6 +41,7 @@
         "@orchestrator-ui/tsconfig": "*",
         "@testing-library/jest-dom": "^7.0.1",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+        "@types/lodash": "^4.17.26",
         "@types/node": "^26.6.2",
         "@types/react": "^18.3.1",
         "@types/react-dom": "^18.2.18",
@@ -49,16 +52,8 @@
         "jest-environment-jsdom": "^30.2.0",
         "jest-watch-typeahead": "^3.0.1",
         "prettier": "^3.6.2",
-        "typescript": "^6.0.3",
+        "typescript": "catalog:",
         "typescript-eslint": "^8.31.1"
     },
-    "overrides": {
-        "typescript": "$typescript",
-        "@orchestrator-ui/orchestrator-ui-components": {
-            "@elastic/eui": "$@elastic/eui"
-        },
-        "next-query-params": {
-            "next": "$next"
-        }
-    }
+    "packageManager": "pnpm@11.15.1"
 }
