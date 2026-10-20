@@ -1,6 +1,21 @@
 {
-    "extends": "@orchestrator-ui/tsconfig/nextjs.json",
+    "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
+        "allowJs": true,
+        "composite": false,
+        "declaration": false,
+        "declarationMap": false,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "incremental": true,
+        "inlineSources": false,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "jsxImportSource": "@emotion/react",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "noEmit": true,
         "paths": {
             "@/*": ["./*"]
         },
@@ -9,8 +24,12 @@
                 "name": "next"
             }
         ],
+        "preserveWatchOutput": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
         "strictNullChecks": true,
-        "jsx": "preserve"
+        "target": "es2015"
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
     "exclude": ["node_modules"]

@@ -1,16 +1,17 @@
-FROM node:18-alpine AS builder
+FROM node:24-alpine AS builder
 
 # ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED 1
 
 WORKDIR /app
+RUN npm install -g pnpm@11.15.1
 COPY . .
 
-RUN npm install && npm update @orchestrator-ui/orchestrator-ui-components && npm update @orchestrator-ui/eslint-config-custom && npm update @orchestrator-ui/jest-config && npm update @orchestrator-ui/tsconfig
-RUN npm run build
+RUN pnpm install && pnpm update @orchestrator-ui/orchestrator-ui-components
+RUN pnpm run build
 
 
-FROM node:18-alpine AS runner
+FROM node:24-alpine AS runner
 
 # ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
