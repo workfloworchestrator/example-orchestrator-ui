@@ -7,7 +7,7 @@ WORKDIR /app
 RUN npm install -g pnpm@11.15.1
 COPY . .
 
-RUN pnpm install && pnpm update @orchestrator-ui/orchestrator-ui-components @orchestrator-ui/eslint-config-custom @orchestrator-ui/jest-config @orchestrator-ui/tsconfig
+RUN pnpm install && pnpm update @orchestrator-ui/orchestrator-ui-components
 RUN pnpm run build
 
 

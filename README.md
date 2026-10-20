@@ -311,9 +311,6 @@ manually:
 
 ```sh
 pnpm update @orchestrator-ui/orchestrator-ui-components
-pnpm update @orchestrator-ui/eslint-config-custom
-pnpm update @orchestrator-ui/jest-config
-pnpm update @orchestrator-ui/tsconfig
 ```
 
 See [`update-instructions.md`](./update-instructions.md) for the full
