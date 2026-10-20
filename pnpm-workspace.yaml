@@ -1,0 +1,15 @@
+catalog:
+  '@elastic/eui': ^122.1.0
+  next: ^16.3.5
+  typescript: ^6.0.3
+
+overrides:
+  typescript: 'catalog:'
+  '@orchestrator-ui/orchestrator-ui-components>@elastic/eui': 'catalog:'
+  next-query-params>next: 'catalog:'
+
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  esbuild: true
+  unrs-resolver: true
