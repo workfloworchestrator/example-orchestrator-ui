@@ -70,6 +70,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         startWorkflowFilters,
         showWorkflowUserGuide:
             SHOW_WORKFLOW_USER_GUIDE?.toLowerCase() === 'true',
-        expandWorkflowUserGuideOnStart: EXPAND_WORKFLOW_USER_GUIDE_ON_START?.toLowerCase() === 'true',
+        expandWorkflowUserGuideOnStart:
+            EXPAND_WORKFLOW_USER_GUIDE_ON_START?.toLowerCase() === 'true',
     };
 };
