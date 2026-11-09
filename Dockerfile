@@ -1,16 +1,19 @@
-FROM node:18-alpine AS builder
+FROM node:24-alpine AS builder
 
 # ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED 1
 
+# Use the pnpm version pinned in package.json's "packageManager" field
+RUN corepack enable
+
 WORKDIR /app
 COPY . .
 
-RUN npm install && npm update @orchestrator-ui/orchestrator-ui-components
-RUN npm run build
+RUN pnpm install --frozen-lockfile && pnpm update --no-save @orchestrator-ui/orchestrator-ui-components
+RUN pnpm run build
 
 
-FROM node:18-alpine AS runner
+FROM node:24-alpine AS runner
 
 # ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0

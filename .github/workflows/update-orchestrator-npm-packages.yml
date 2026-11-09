@@ -19,32 +19,24 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+      - uses: pnpm/action-setup@v4
       - name: Use Node.js 24
         uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: 'npm'
-      - name: Upgrade npm to 11.x
-        run: npm install -g npm@11
+          cache: 'pnpm'
       - name: Installing dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
       - name: Update orchestrator-ui packages
         run: ./update-orchestrator-ui-components.sh
       - name: Get updated package versions
         id: versions
         run: |
           echo "components=$(node -p "require('./node_modules/@orchestrator-ui/orchestrator-ui-components/package.json').version")" >> "$GITHUB_OUTPUT"
-          {
-            echo 'list<<EOF'
-            for pkg in @orchestrator-ui/orchestrator-ui-components @orchestrator-ui/eslint-config-custom @orchestrator-ui/jest-config @orchestrator-ui/tsconfig; do
-              echo "- \`${pkg}@$(node -p "require('./node_modules/${pkg}/package.json').version")\`"
-            done
-            echo 'EOF'
-          } >> "$GITHUB_OUTPUT"
-      - run: npm run lint
-      - run: npm run tsc
-      - run: npm run test
-      - run: npm run build
+      - run: pnpm run lint
+      - run: pnpm run tsc
+      - run: pnpm run test
+      - run: pnpm run build
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
@@ -55,5 +47,5 @@ jobs:
             Automated update triggered by a new component-library release.
 
             Updated packages:
-            ${{ steps.versions.outputs.list }}
+            - `@orchestrator-ui/orchestrator-ui-components@${{ steps.versions.outputs.components }}`
           delete-branch: true

@@ -31,7 +31,7 @@ Orchestrator backend (REST + GraphQL + optional WebSocket).
     - [Branding (logo)](#branding-logo)
     - [Translations](#translations)
     - [Adding pages](#adding-pages)
-- [npm scripts](#npm-scripts)
+- [Scripts](#scripts)
 - [Building & deploying](#building--deploying)
 - [Local Keycloak for OAuth testing](#local-keycloak-for-oauth-testing)
 - [Updating the component library](#updating-the-component-library)
@@ -73,8 +73,10 @@ components into a Next.js app and provides the integration glue
 
 ## Prerequisites
 
-- **Node.js 18+** (the Docker image uses `node:18-alpine`)
-- **npm** (the lockfile is `package-lock.json`)
+- **Node.js 20.9+** (required by Next.js 16; CI and the Docker image use Node 24)
+- **pnpm** (the lockfile is `pnpm-lock.yaml`). The version is pinned in the
+  `packageManager` field of `package.json`; run `corepack enable` to use it
+  automatically.
 - A running Workflow Orchestrator backend. The simplest option is the
   [`example-orchestrator`](https://github.com/workfloworchestrator/example-orchestrator)
   reference backend (Docker Compose).
@@ -85,14 +87,14 @@ components into a Next.js app and provides the integration glue
 git clone git@github.com:workfloworchestrator/example-orchestrator-ui.git
 cd example-orchestrator-ui
 
-npm install
+pnpm install
 cp .env.example .env
 # edit .env — at minimum, for local dev you typically want:
 #   OAUTH2_ACTIVE=false
 #   ORCHESTRATOR_API_HOST=http://localhost:8080
 #   ORCHESTRATOR_GRAPHQL_HOST=http://localhost:8080
 
-npm run dev    # http://localhost:3000
+pnpm dev       # http://localhost:3000
 ```
 
 In a separate terminal, start a backend to talk to:
@@ -253,18 +255,18 @@ Because this is the Next.js **pages router**, you add a new route simply
 by creating a file under `pages/`. To make it appear in the nav, add an
 entry to `addMenuItems` in `pages/_app.tsx`.
 
-## npm scripts
+## Scripts
 
-| Command                | Purpose                                     |
-| ---------------------- | ------------------------------------------- |
-| `npm run dev`          | Start the Next.js dev server on port 3000.  |
-| `npm run build`        | Production build (emits standalone output). |
-| `npm start`            | Serve the production build.                 |
-| `npm run tsc`          | Type-check the project without emitting.    |
-| `npm run lint`         | Run ESLint.                                 |
-| `npm run prettier`     | Check formatting.                           |
-| `npm run prettier-fix` | Apply Prettier formatting.                  |
-| `npm test`             | Run Jest (passes with no tests).            |
+| Command             | Purpose                                     |
+| ------------------- | ------------------------------------------- |
+| `pnpm dev`          | Start the Next.js dev server on port 3000.  |
+| `pnpm build`        | Production build (emits standalone output). |
+| `pnpm start`        | Serve the production build.                 |
+| `pnpm tsc`          | Type-check the project without emitting.    |
+| `pnpm lint`         | Run ESLint.                                 |
+| `pnpm prettier`     | Check formatting.                           |
+| `pnpm prettier-fix` | Apply Prettier formatting.                  |
+| `pnpm test`         | Run Jest (passes with no tests).            |
 
 A Husky `postinstall` hook is registered for pre-commit checks.
 
@@ -312,7 +314,7 @@ When using this repo **standalone**, you have to refresh the lockfile
 manually:
 
 ```sh
-npm update @orchestrator-ui/orchestrator-ui-components
+pnpm update --no-save @orchestrator-ui/orchestrator-ui-components
 ```
 
 See [`update-instructions.md`](./update-instructions.md) for the full
@@ -329,10 +331,10 @@ it before you upgrade.
 Pull requests are welcome. Before sending one:
 
 ```sh
-npm run lint
-npm run tsc
-npm run prettier
-npm test
+pnpm lint
+pnpm tsc
+pnpm prettier
+pnpm test
 ```
 
 The Husky `pre-commit` hook will run formatting/linting on staged files
