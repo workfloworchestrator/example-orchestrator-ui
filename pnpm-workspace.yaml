@@ -17,3 +17,6 @@ allowBuilds:
   '@parcel/watcher': true
   '@swc/core': true
   unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - '@orchestrator-ui/orchestrator-agent-chat@0.2.2'
