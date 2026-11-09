@@ -43,3 +43,6 @@ tsconfig.tsbuildinfo
 
 # AI
 .claude
+
+# Local component library version
+/orchestrator-ui-components
