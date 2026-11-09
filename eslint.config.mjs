@@ -16,6 +16,8 @@ export default defineConfig([
         '.next',
         'next.config.js',
         'next-env.d.ts',
+        // Optional local checkout of the component library, see use-local-orchestrator-ui-components.sh
+        'orchestrator-ui-components',
     ]),
     {
         files: ['**/*.{js,ts,jsx,tsx}'],
