@@ -1,8 +1,8 @@
-## Updating library version in package-lock.json.
+## Updating library version in pnpm-lock.yaml.
 
 The version of dependency `@orchestrator-ui/orchestrator-ui-components` is set to `*`. This is needed for proper usage in our Turborepo setup in
 our [component library repository](https://github.com/workfloworchestrator/orchestrator-ui-library/). The current version of the component
-library that the example app downloads from NPM is fixed in package-lock.json. When a new version of the component library
+library that the example app downloads from NPM is fixed in pnpm-lock.yaml. When a new version of the component library
 is available this repository needs to be explicitly updated.
 
 When a new version of the component library packages is published to npm, a webhook is called that triggers a workflow that updates the packages and
@@ -12,5 +12,5 @@ repository to build correctly. In that case the workflow checks fail and a manua
 To manually update the versions use `update-orchestrator-ui-components.sh` or run these commands
 
 ```bash
-npm update @orchestrator-ui/orchestrator-ui-components
+pnpm update --no-save @orchestrator-ui/orchestrator-ui-components
 ```
