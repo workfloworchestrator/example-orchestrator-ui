@@ -313,9 +313,6 @@ manually:
 
 ```sh
 npm update @orchestrator-ui/orchestrator-ui-components
-npm update @orchestrator-ui/eslint-config-custom
-npm update @orchestrator-ui/jest-config
-npm update @orchestrator-ui/tsconfig
 ```
 
 See [`update-instructions.md`](./update-instructions.md) for the full
