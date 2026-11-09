@@ -7,10 +7,7 @@ import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import { QueryParamProvider } from 'use-query-params';
 
-import {
-    EuiProvider,
-    EuiThemeColorMode,
-} from '@elastic/eui';
+import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
 import {
     ColorModes,
     ConfirmationDialogContextWrapper,
