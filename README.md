@@ -320,6 +320,28 @@ pnpm update --no-save @orchestrator-ui/orchestrator-ui-components
 See [`update-instructions.md`](./update-instructions.md) for the full
 note.
 
+## Developing with a local component library
+
+By default the app installs the component library from npm. To work on the
+library and the app together, run:
+
+```sh
+./use-local-orchestrator-ui-components.sh
+```
+
+This clones the [orchestrator-ui-library](https://github.com/workfloworchestrator/orchestrator-ui-library)
+into `./orchestrator-ui-components` (branch `new-app-setup`) when it is not
+there yet, builds it, and points the dependency in `package.json` to
+`file:./orchestrator-ui-components`. Run `pnpm run dev` inside
+`./orchestrator-ui-components` to rebuild the library on changes.
+
+The changes to `package.json`, `pnpm-lock.yaml` and `pnpm-workspace.yaml`
+must not be committed. To go back to the npm release:
+
+```sh
+git checkout package.json pnpm-lock.yaml pnpm-workspace.yaml && pnpm install
+```
+
 ## Breaking changes
 
 Notable version-to-version breakage (env-var renames, prop changes,

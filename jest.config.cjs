@@ -19,6 +19,11 @@ const esmDependencies = [
 // https://github.com/uuidjs/uuid/blob/main/CHANGELOG.md#900-2022-09-05
 const customJestConfig = {
     displayName: 'Wfo-UI Tests',
+    // Optional local checkout of the component library, see use-local-orchestrator-ui-components.sh
+    testPathIgnorePatterns: [
+        '/node_modules/',
+        '<rootDir>/orchestrator-ui-components/',
+    ],
     transformIgnorePatterns: [
         `/node_modules/(?!(${esmDependencies.join('|')})/)`,
         '^.+\\.module\\.(css|sass|scss)$',
