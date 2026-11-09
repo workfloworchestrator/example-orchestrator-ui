@@ -195,11 +195,11 @@ Most pages are one-liners that delegate to a component from
 `@orchestrator-ui/orchestrator-ui-components`. For example:
 
 ```tsx
-// pages/search.tsx
-import { WfoSearch } from '@orchestrator-ui/orchestrator-ui-components';
+// pages/index.tsx
+import { WfoStartPage } from '@orchestrator-ui/orchestrator-ui-components';
 
-export default function SearchPage() {
-    return <WfoSearch />;
+export default function Index() {
+    return <WfoStartPage />;
 }
 ```
 
@@ -209,14 +209,14 @@ This makes it easy to override individual screens by editing one file.
 
 ### Navigation & menu items
 
-The side navigation is configured in `pages/_app.tsx` via the
-`overrideMenuItems` prop on `<WfoPageTemplate>`. The reference
-implementation adds an extra entry `Search` by appending to the default menu items:
+The side navigation can be customized in `pages/_app.tsx` via the
+`overrideMenuItems` prop on `<WfoPageTemplate>`. For example, to append an
+extra entry to the default menu items:
 
 ```tsx
 const addMenuItems = (defaultMenuItems) => [
     ...defaultMenuItems,
-    { name: 'Search', id: '20', href: '/search' /* … */ },
+    { name: 'My page', id: '20', href: '/my-page' /* … */ },
 ];
 ```
 

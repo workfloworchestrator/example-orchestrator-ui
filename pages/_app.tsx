@@ -5,12 +5,10 @@ import { SessionProvider } from 'next-auth/react';
 import { NextAdapter } from 'next-query-params';
 import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { QueryParamProvider } from 'use-query-params';
 
 import {
     EuiProvider,
-    EuiSideNavItemType,
     EuiThemeColorMode,
 } from '@elastic/eui';
 import {
@@ -24,7 +22,6 @@ import {
     WfoErrorMonitoring,
     WfoErrorMonitoringProvider,
     WfoLogoSpinner,
-    WfoMenuItemLink,
     WfoPageTemplate,
     WfoToastsList,
     emptyOrchestratorConfig,
@@ -40,7 +37,6 @@ import '../font/inter.css';
 type AppOwnProps = { orchestratorConfig: OrchestratorConfig };
 
 function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
-    const router = useRouter();
     const { orchestratorConfig } = pageProps;
     const [orchestratorLoadedConfig, setOrchestratorLoadedConfig] =
         useState<OrchestratorConfig | null>(null);
@@ -56,25 +52,6 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
             setOrchestratorLoadedConfig(orchestratorConfig);
         }
     }, [orchestratorConfig]);
-
-    const addMenuItems = (
-        defaultMenuItems: EuiSideNavItemType<object>[],
-    ): EuiSideNavItemType<object>[] => [
-        ...defaultMenuItems,
-        {
-            name: 'Search',
-            id: '20',
-            isSelected: router.pathname === '/search',
-            href: '/search',
-            renderItem: () => (
-                <WfoMenuItemLink
-                    path={'/search'}
-                    translationString="Search"
-                    isSelected={router.pathname === '/search'}
-                />
-            ),
-        },
-    ];
 
     const errorMonitoringHandler: WfoErrorMonitoring | undefined = {
         reportError: (error) => console.error(error),
@@ -115,9 +92,6 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                                             <ConfirmationDialogContextWrapper>
                                                 <WfoPageTemplate
                                                     getAppLogo={getAppLogo}
-                                                    overrideMenuItems={
-                                                        addMenuItems
-                                                    }
                                                     colorMode={colorMode}
                                                     setColorMode={setColorMode}
                                                 >
