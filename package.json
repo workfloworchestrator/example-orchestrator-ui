@@ -20,7 +20,7 @@
         "@elastic/eui": "catalog:",
         "@emotion/css": "^11.11.2",
         "@emotion/react": "^11.11.1",
-        "@orchestrator-ui/orchestrator-ui-components": "file:./orchestrator-ui-components",
+        "@orchestrator-ui/orchestrator-ui-components": "10.4.0",
         "@reduxjs/toolkit": "^2.9.0",
         "eslint": "catalog:",
         "lodash": "^4.18.1",
