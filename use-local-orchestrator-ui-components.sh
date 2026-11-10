@@ -8,6 +8,8 @@
 #  2. Installs and builds the library.
 #  3. Points the dependency in package.json to file:./orchestrator-ui-components
 #     and reinstalls.
+#  4. Runs 'pnpm run dev' in the library so changes are rebuilt automatically
+#     (keeps running until you stop it with Ctrl+C).
 #
 # To go back to the npm release:
 #   git checkout package.json pnpm-lock.yaml pnpm-workspace.yaml && pnpm install
@@ -68,6 +70,9 @@ pnpm install
 
 echo
 echo "Done: the app now uses the local $PACKAGE from ./$DIR."
-echo "Run 'pnpm run dev' in ./$DIR to rebuild it on changes."
 echo "Do not commit the changes to package.json, pnpm-lock.yaml and pnpm-workspace.yaml. To go back to npm:"
 echo "  git checkout package.json pnpm-lock.yaml pnpm-workspace.yaml && pnpm install"
+echo
+echo "Starting 'pnpm run dev' in ./$DIR to rebuild $PACKAGE on changes (Ctrl+C to stop)..."
+cd "$DIR"
+exec pnpm run dev
