@@ -7,7 +7,11 @@ import App, { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import { QueryParamProvider } from 'use-query-params';
 
-import { EuiProvider, EuiThemeColorMode } from '@elastic/eui';
+import {
+    EuiProvider,
+    EuiSideNavItemType,
+    EuiThemeColorMode,
+} from '@elastic/eui';
 import {
     ColorModes,
     ConfirmationDialogContextWrapper,
@@ -32,6 +36,11 @@ import { TranslationsProvider } from '@/translations/translationsProvider';
 import '../font/inter.css';
 
 type AppOwnProps = { orchestratorConfig: OrchestratorConfig };
+
+// Add your own menu items here
+const addMenuItems = (
+    defaultMenuItems: EuiSideNavItemType<object>[],
+): EuiSideNavItemType<object>[] => [...defaultMenuItems];
 
 function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
     const { orchestratorConfig } = pageProps;
@@ -91,6 +100,9 @@ function CustomApp({ Component, pageProps }: AppProps & AppOwnProps) {
                                                     getAppLogo={getAppLogo}
                                                     colorMode={colorMode}
                                                     setColorMode={setColorMode}
+                                                    overrideMenuItems={
+                                                        addMenuItems
+                                                    }
                                                 >
                                                     <QueryParamProvider
                                                         adapter={NextAdapter}
