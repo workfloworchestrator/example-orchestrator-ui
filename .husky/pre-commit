@@ -1,8 +1,24 @@
+echo "---------- Checking for local orchestrator-ui-components ----------"
+# use-local-orchestrator-ui-components.sh points the dependency to file:./orchestrator-ui-components
+# and changes package.json, pnpm-lock.yaml and pnpm-workspace.yaml. Those changes must not be committed.
+LOCAL_SPEC='file:./orchestrator-ui-components'
+if grep -qF "$LOCAL_SPEC" package.json || git show :package.json 2>/dev/null | grep -qF "$LOCAL_SPEC"; then
+    staged=$(git diff --cached --name-only -- package.json pnpm-lock.yaml pnpm-workspace.yaml)
+    if [ -n "$staged" ]; then
+        echo "Error: you are using the local orchestrator-ui-components ($LOCAL_SPEC)." >&2
+        echo "These files are staged but must not be committed in this mode:" >&2
+        echo "$staged" | sed 's/^/  /' >&2
+        echo "Unstage them with: git restore --staged $(echo $staged)" >&2
+        echo "Or go back to npm first: git checkout package.json pnpm-lock.yaml pnpm-workspace.yaml && pnpm install" >&2
+        exit 1
+    fi
+fi
+
 echo "---------- Running TSC ----------"
-npm run tsc
+pnpm run tsc
 
 echo "---------- Running Linter ----------"
-npm run lint
+pnpm run lint
 
 echo "---------- Running Tests ----------"
-npm run test
+pnpm run test

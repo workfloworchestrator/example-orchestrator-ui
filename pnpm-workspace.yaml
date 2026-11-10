@@ -1,0 +1,22 @@
+# Versions shared between package.json and the overrides below.
+catalog:
+  '@elastic/eui': ^122.1.0
+  eslint: ^10.0.2
+  next: ^16.4.5
+  typescript: ^6.0.3
+
+# Force transitive dependencies onto the same versions as our direct dependencies.
+overrides:
+  typescript: 'catalog:'
+  '@orchestrator-ui/orchestrator-ui-components>@elastic/eui': 'catalog:'
+  next-query-params>next: 'catalog:'
+  eslint-plugin-react>eslint: 'catalog:'
+
+# Dependencies allowed to run install scripts (pnpm blocks them by default).
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - '@orchestrator-ui/orchestrator-agent-chat@0.2.2'

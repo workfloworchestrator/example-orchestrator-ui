@@ -24,6 +24,7 @@ next-env.d.ts
 
 # debug
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
@@ -42,3 +43,6 @@ tsconfig.tsbuildinfo
 
 # AI
 .claude
+
+# Local component library version
+/orchestrator-ui-components
