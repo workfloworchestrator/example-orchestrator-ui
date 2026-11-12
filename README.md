@@ -329,10 +329,14 @@ library and the app together, run:
 ```
 
 This clones the [orchestrator-ui-library](https://github.com/workfloworchestrator/orchestrator-ui-library)
-into `./orchestrator-ui-components` (branch `new-app-setup`) when it is not
+into `./orchestrator-ui-components` when it is not
 there yet, builds it, and points the dependency in `package.json` to
 `file:./orchestrator-ui-components`. Run `pnpm run dev` inside
 `./orchestrator-ui-components` to rebuild the library on changes.
+
+Changes to the library are now picked up by your local app. Changes in the
+`orchestrator-ui-library` folder are pointed at the https://github.com/workfloworchestrator/orchestrator-ui-library/ 
+repository and can be offered as a pull request there.
 
 The changes to `package.json`, `pnpm-lock.yaml` and `pnpm-workspace.yaml`
 must not be committed. To go back to the npm release:
