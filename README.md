@@ -218,11 +218,8 @@ extra entry to the default menu items:
 ```tsx
 const addMenuItems = (defaultMenuItems) => [
     ...defaultMenuItems,
-<<<<<<< HEAD
     { name: 'My page', id: '20', href: '/my-page' /* … */ },
-=======
     { name: 'Custom page', id: '20', href: '/custom-page', /* … */ },
->>>>>>> bf6ff40 (Update README with small fixes)
 ];
 ```
 
