@@ -198,10 +198,10 @@ Most pages are one-liners that delegate to a component from
 
 ```tsx
 // pages/search.tsx
-import { WfoSearch } from '@orchestrator-ui/orchestrator-ui-components';
+import { WfoStartPage } from '@orchestrator-ui/orchestrator-ui-components';
 
-export default function SearchPage() {
-    return <WfoSearch />;
+export default function StartPage() {
+    return <WfoStartPage />;
 }
 ```
 
@@ -218,7 +218,7 @@ implementation adds an extra entry `Search` by appending to the default menu ite
 ```tsx
 const addMenuItems = (defaultMenuItems) => [
     ...defaultMenuItems,
-    { name: 'Search', id: '20', href: '/search' /* … */ },
+    { name: 'Custom page', id: '20', href: '/custom-page', /* … */ },
 ];
 ```
 
@@ -308,13 +308,12 @@ Then create a realm + client in the Keycloak admin UI and point the
 
 ## Updating the component library
 
-`@orchestrator-ui/orchestrator-ui-components` is declared with version
-`*` so the Turborepo monorepo build always resolves the freshest version.
-When using this repo **standalone**, you have to refresh the lockfile
-manually:
+If there is a new version of `@orchestrator-ui/orchestrator-ui-components` updating to the latest version adds the
+new features and fixes automatically in most cases.
+
 
 ```sh
-pnpm update --no-save @orchestrator-ui/orchestrator-ui-components
+pnpm update @orchestrator-ui/orchestrator-ui-components
 ```
 
 See [`update-instructions.md`](./update-instructions.md) for the full
