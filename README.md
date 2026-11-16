@@ -331,8 +331,13 @@ library and the app together, run:
 This clones the [orchestrator-ui-library](https://github.com/workfloworchestrator/orchestrator-ui-library)
 into `./orchestrator-ui-components` when it is not
 there yet, builds it, and points the dependency in `package.json` to
-`file:./orchestrator-ui-components`. Run `pnpm run dev` inside
+`file:./orchestrator-ui-components`. It then runs `pnpm run dev` inside
 `./orchestrator-ui-components` to rebuild the library on changes.
+
+pnpm hardlinks the library into `node_modules`, and on Linux inotify does not
+report writes done through the other path of a hardlink. The script therefore
+runs `tsup --watch` with an `--onSuccess` command that replaces the files in the
+installed copy with fresh ones after every rebuild, so `next dev` notices it.
 
 Changes to the library are now picked up by your local app. Changes in the
 `orchestrator-ui-library` folder are pointed at the https://github.com/workfloworchestrator/orchestrator-ui-library/

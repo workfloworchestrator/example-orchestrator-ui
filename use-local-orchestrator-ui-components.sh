@@ -73,6 +73,11 @@ echo "Done: the app now uses the local $PACKAGE from ./$DIR."
 echo "Do not commit the changes to package.json, pnpm-lock.yaml and pnpm-workspace.yaml. To go back to npm:"
 echo "  git checkout package.json pnpm-lock.yaml pnpm-workspace.yaml && pnpm install"
 echo
+# pnpm hardlinked the library into node_modules, and inotify does not report writes done
+# through the other path of a hardlink. After every rebuild, replace the files in the
+# installed copy with fresh ones (--remove-destination), so the file watcher of
+# 'next dev' sees the change.
+INSTALLED="$(readlink -f "node_modules/$PACKAGE")"
 echo "Starting 'pnpm run dev' in ./$DIR to rebuild $PACKAGE on changes (Ctrl+C to stop)..."
 cd "$DIR"
-exec pnpm run dev
+exec pnpm run dev --onSuccess "cp -r --remove-destination dist/. '$INSTALLED/dist/'"
