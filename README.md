@@ -315,7 +315,6 @@ Then create a realm + client in the Keycloak admin UI and point the
 If there is a new version of `@orchestrator-ui/orchestrator-ui-components` updating to the latest version adds the
 new features and fixes automatically in most cases.
 
-
 ```sh
 pnpm update @orchestrator-ui/orchestrator-ui-components
 ```
@@ -339,7 +338,7 @@ there yet, builds it, and points the dependency in `package.json` to
 `./orchestrator-ui-components` to rebuild the library on changes.
 
 Changes to the library are now picked up by your local app. Changes in the
-`orchestrator-ui-library` folder are pointed at the https://github.com/workfloworchestrator/orchestrator-ui-library/ 
+`orchestrator-ui-library` folder are pointed at the https://github.com/workfloworchestrator/orchestrator-ui-library/
 repository and can be offered as a pull request there.
 
 The changes to `package.json`, `pnpm-lock.yaml` and `pnpm-workspace.yaml`
