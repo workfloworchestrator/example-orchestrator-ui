@@ -219,7 +219,7 @@ extra entry to the default menu items:
 const addMenuItems = (defaultMenuItems) => [
     ...defaultMenuItems,
     { name: 'My page', id: '20', href: '/my-page' /* … */ },
-    { name: 'Custom page', id: '20', href: '/custom-page', /* … */ },
+    { name: 'Custom page', id: '20', href: '/custom-page' /* … */ },
 ];
 ```
 
