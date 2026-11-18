@@ -45,7 +45,7 @@ Orchestrator backend (REST + GraphQL + optional WebSocket).
 
 - Minimal reference integration with Workflow Orchestrator, with sensible defaults
 - Subscription, workflow, task and metadata management pages
-- Built-in pages for **search**
+- Optional chat popup for the [WFO agent](https://github.com/workfloworchestrator/orchestrator-agent)
 - OAuth2 / OIDC login via NextAuth with refresh-token rotation
 - Internationalization: `en-GB` (default) and `nl-NL`, both extensible
 - Theme toggle (light / dark) and per-environment banners
@@ -194,7 +194,6 @@ unauthenticated requests.
 ├── pages/                     # Next.js routes (pages router)
 │   ├── _app.tsx               # providers, menu, auth wiring
 │   ├── index.tsx              # WfoStartPage
-│   ├── search.tsx
 │   ├── settings.tsx
 │   ├── subscriptions/         # list + detail
 │   ├── workflows/             # list, detail, "new"
@@ -215,7 +214,7 @@ Most pages are one-liners that delegate to a component from
 `@orchestrator-ui/orchestrator-ui-components`. For example:
 
 ```tsx
-// pages/search.tsx
+// pages/index.tsx
 import { WfoStartPage } from '@orchestrator-ui/orchestrator-ui-components';
 
 export default function StartPage() {
