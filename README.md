@@ -24,7 +24,7 @@ Orchestrator backend (REST + GraphQL + optional WebSocket).
     - [Backend connection](#backend-connection)
     - [Authentication (OAuth2 / OIDC)](#authentication-oauth2--oidc)
     - [UI feature toggles](#ui-feature-toggles)
-    - [Agent (CopilotKit)](#agent-copilotkit)
+    - [Agent chat](#agent-chat)
 - [Project layout](#project-layout)
 - [Customization](#customization)
     - [Navigation & menu items](#navigation--menu-items)
@@ -166,6 +166,24 @@ state checks are enabled, and access tokens are refreshed automatically.
 | `START_WORKFLOW_FILTERS`              | Pipe-separated list of workflow categories to expose on the start page. Underscores are converted to spaces, e.g. `Create \| Modify \| Terminate`. |
 | `SHOW_WORKFLOW_USER_GUIDE`            | `true` to render a collapsible workflow user-guide (collapsed by default see `EXPAND_WORKFLOW_USER_GUIDE_ON_START`)                                |
 | `EXPAND_WORKFLOW_USER_GUIDE_ON_START` | `true` to have the workflow user-guide expanded by default (see `SHOW_WORKFLOW_USER_GUIDE`)                                                        |
+
+### Agent chat
+
+| Variable                 | Description                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `ORCHESTRATOR_AGENT_URL` | The WFO agent's AG-UI route as the browser reaches it, e.g. `/agui/`. When set, a chat popup is shown on every page; empty hides it. |
+
+The popup also calls the agent's `/chats` route, which it derives by
+stripping a trailing `/agui/` from the URL (`/agui/` becomes `/chats`), so
+keep the URL ending in `/agui/`. The agent sends no CORS headers, so serve
+it on the UI's origin: put a reverse proxy in front that forwards `/agui/`
+and `/chats` to the agent, and set `ORCHESTRATOR_AGENT_URL=/agui/`. An
+absolute URL such as `https://agent.example/agui/` only works when the
+agent's responses carry CORS headers for the UI's origin.
+
+The popup sends the logged-in user's access token along. With
+`OAUTH2_ACTIVE=false` there is no token, so the agent must accept
+unauthenticated requests.
 
 ## Project layout
 

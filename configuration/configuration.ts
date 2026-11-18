@@ -24,6 +24,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         START_WORKFLOW_FILTERS,
         SHOW_WORKFLOW_USER_GUIDE,
         EXPAND_WORKFLOW_USER_GUIDE_ON_START,
+        ORCHESTRATOR_AGENT_URL,
     } = getEnvironmentVariables([
         'USE_THEME_TOGGLE',
         'ENVIRONMENT_NAME',
@@ -43,6 +44,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         'START_WORKFLOW_FILTERS',
         'SHOW_WORKFLOW_USER_GUIDE',
         'EXPAND_WORKFLOW_USER_GUIDE_ON_START',
+        'ORCHESTRATOR_AGENT_URL',
     ]);
 
     const graphqlEndpointCore = `${ORCHESTRATOR_GRAPHQL_HOST}${ORCHESTRATOR_GRAPHQL_PATH}`;
@@ -72,5 +74,6 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
             SHOW_WORKFLOW_USER_GUIDE?.toLowerCase() === 'true',
         expandWorkflowUserGuideOnStart:
             EXPAND_WORKFLOW_USER_GUIDE_ON_START?.toLowerCase() === 'true',
+        orchestratorAgentUrl: ORCHESTRATOR_AGENT_URL?.trim() || undefined,
     };
 };

@@ -8,7 +8,6 @@ module.exports = {
         defaultLocale: 'en-GB',
     },
     transpilePackages: [
-        '@copilotkit/react-core',
         '@orchestrator-ui/orchestrator-ui-components',
         'pydantic-forms',
     ],
