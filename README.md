@@ -329,7 +329,7 @@ library and the app together, run:
 ```
 
 This clones the [orchestrator-ui-library](https://github.com/workfloworchestrator/orchestrator-ui-library)
-into `./orchestrator-ui-components` when it is not
+over SSH (so you need an SSH key set up for GitHub) into `./orchestrator-ui-components` when it is not
 there yet, builds it, and points the dependency in `package.json` to
 `file:./orchestrator-ui-components`. It then runs `pnpm run dev` inside
 `./orchestrator-ui-components` to rebuild the library on changes.

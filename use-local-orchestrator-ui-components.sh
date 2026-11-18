@@ -16,7 +16,7 @@
 #
 set -euo pipefail
 
-REPO_URL="https://github.com/workfloworchestrator/orchestrator-ui-library.git"
+REPO_URL="git@github.com:workfloworchestrator/orchestrator-ui-library.git"
 BRANCH="main"
 PACKAGE="@orchestrator-ui/orchestrator-ui-components"
 DIR="orchestrator-ui-components"
