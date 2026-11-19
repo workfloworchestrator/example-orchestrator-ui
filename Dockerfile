@@ -9,7 +9,7 @@ RUN corepack enable
 WORKDIR /app
 COPY . .
 
-RUN pnpm install --frozen-lockfile && pnpm update --no-save @orchestrator-ui/orchestrator-ui-components
+RUN pnpm install --frozen-lockfile
 RUN pnpm run build
 
 
