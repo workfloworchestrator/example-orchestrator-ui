@@ -169,36 +169,36 @@ state checks are enabled, and access tokens are refreshed automatically.
 
 ### Agent chat (AG-UI)
 
-The component library provides a chat popup on every page when
-`ORCHESTRATOR_AGENT_URL` is set. It follows the WFO theme, passes the signed-in
-person's bearer token, and supports search, charts, workflow forms and CSV
-downloads.
+The UI includes the agent chat popup through `@orchestrator-ui/orchestrator-ui-components`
+11.0.0 or later. It follows the UI theme and passes the signed-in person's access token.
+No separate chat component is needed.
 
-For an agent running on the host at port 8082, add to `.env`:
+Start an [Orchestrator Agent](https://github.com/workfloworchestrator/orchestrator-agent#readme)
+connected to your backend. To enable the popup, add these settings to the UI's `.env`
+(the example assumes the agent runs on the host at port 8082):
 
 ```shell
 ORCHESTRATOR_AGENT_URL=/api/agent/agui/
 ORCHESTRATOR_AGENT_UPSTREAM=http://localhost:8082
 ```
 
-Restart the UI and open the chat button in the bottom-right corner. Leaving
-`ORCHESTRATOR_AGENT_URL` empty hides it.
+Restart the UI with `pnpm dev` and open the chat button in the bottom-right corner.
+Leaving `ORCHESTRATOR_AGENT_URL` empty hides the popup.
 
-| Variable                      | Used by        | Purpose                                                                               |
-| ----------------------------- | -------------- | ------------------------------------------------------------------------------------- |
-| `ORCHESTRATOR_AGENT_URL`      | Browser        | Same-origin AG-UI route, normally `/api/agent/agui/`.                                 |
-| `ORCHESTRATOR_AGENT_UPSTREAM` | UI server only | Agent base URL reachable from the server, such as `http://wfo-agent:8080` in Compose. |
+- `ORCHESTRATOR_AGENT_URL` is the browser-facing AG-UI route, including the trailing
+  slash. Keep it on the UI's own origin.
+- `ORCHESTRATOR_AGENT_UPSTREAM` is the agent's base URL as reached by the UI server.
+  In a container, use the agent's service address, such as `http://wfo-agent:8080`;
+  `localhost` refers to the UI container itself.
 
-The bundled `/api/agent/*` proxy forwards only `/agui/` and `/chats`, streams
-responses without buffering, and preserves download filenames and query
-parameters. It forwards the bearer token to the agent, which validates the
-person's access; UI session cookies are not forwarded. It reads its upstream
-at runtime, so the same built image works with different agent addresses.
-The agent's `OAUTH2_ACTIVE` setting and identity provider must match the
-deployment's access requirements.
+The bundled `/api/agent/*` proxy forwards `/agui/` and `/chats` to the agent for
+streamed replies, history, forms and downloads. No additional proxy is needed.
+With login enabled, configure the agent to accept tokens from the UI's identity
+provider. For a local setup without login, set `OAUTH2_ACTIVE=false` in both services.
 
-For the complete local stack, use `docker-compose.agui.yml` in
-[example-orchestrator](https://github.com/workfloworchestrator/example-orchestrator).
+Ask a question, reload to check saved history, and request a CSV export to check
+that downloads work. For a complete local stack, use the `docker-compose.agui.yml`
+overlay in [example-orchestrator](https://github.com/workfloworchestrator/example-orchestrator).
 
 ## Project layout
 
