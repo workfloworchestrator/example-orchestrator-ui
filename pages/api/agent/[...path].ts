@@ -1,3 +1,4 @@
+// Same-origin proxy for agent chat streams, history, forms and downloads.
 import type { NextApiRequest, NextApiResponse } from 'next';
 import process from 'node:process';
 import { Readable } from 'node:stream';
@@ -12,7 +13,6 @@ export const config = {
     maxDuration: 300,
 };
 
-/** Same-origin transport for the popup, its history, forms and downloads. */
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse,
