@@ -38,7 +38,6 @@
         "use-query-params": "^2.2.2"
     },
     "devDependencies": {
-        "@jest/globals": "^30.2.0",
         "@eslint/js": "^10.0.1",
         "@testing-library/jest-dom": "^7.0.1",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
