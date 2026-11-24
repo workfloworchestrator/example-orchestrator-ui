@@ -24,7 +24,7 @@ Orchestrator backend (REST + GraphQL + optional WebSocket).
     - [Backend connection](#backend-connection)
     - [Authentication (OAuth2 / OIDC)](#authentication-oauth2--oidc)
     - [UI feature toggles](#ui-feature-toggles)
-    - [Agent (CopilotKit)](#agent-copilotkit)
+    - [Agent chat (AG-UI)](#agent-chat-ag-ui)
 - [Project layout](#project-layout)
 - [Customization](#customization)
     - [Navigation & menu items](#navigation--menu-items)
@@ -167,6 +167,39 @@ state checks are enabled, and access tokens are refreshed automatically.
 | `SHOW_WORKFLOW_USER_GUIDE`            | `true` to render a collapsible workflow user-guide (collapsed by default see `EXPAND_WORKFLOW_USER_GUIDE_ON_START`)                                |
 | `EXPAND_WORKFLOW_USER_GUIDE_ON_START` | `true` to have the workflow user-guide expanded by default (see `SHOW_WORKFLOW_USER_GUIDE`)                                                        |
 
+### Agent chat (AG-UI)
+
+The UI includes the agent chat popup through `@orchestrator-ui/orchestrator-ui-components`
+11.0.0 or later. It follows the UI theme and passes the signed-in person's access token.
+No separate chat component is needed.
+
+Start an [Orchestrator Agent](https://github.com/workfloworchestrator/orchestrator-agent#readme)
+connected to your backend. To enable the popup, add these settings to the UI's `.env`
+(the example assumes the agent runs on the host at port 8082):
+
+```shell
+ORCHESTRATOR_AGENT_URL=/api/agent/agui/
+ORCHESTRATOR_AGENT_UPSTREAM=http://localhost:8082
+```
+
+Restart the UI with `pnpm dev` and open the chat button in the bottom-right corner.
+Leaving `ORCHESTRATOR_AGENT_URL` empty hides the popup.
+
+- `ORCHESTRATOR_AGENT_URL` is the browser-facing AG-UI route, including the trailing
+  slash. Keep it on the UI's own origin.
+- `ORCHESTRATOR_AGENT_UPSTREAM` is the agent's base URL as reached by the UI server.
+  In a container, use the agent's service address, such as `http://wfo-agent:8080`;
+  `localhost` refers to the UI container itself.
+
+The bundled `/api/agent/*` proxy forwards `/agui/` and `/chats` to the agent for
+streamed replies, history, forms and downloads. No additional proxy is needed.
+With login enabled, configure the agent to accept tokens from the UI's identity
+provider. For a local setup without login, set `OAUTH2_ACTIVE=false` in both services.
+
+Ask a question, reload to check saved history, and request a CSV export to check
+that downloads work. For a complete local stack, use the `docker-compose.agui.yml`
+overlay in [example-orchestrator](https://github.com/workfloworchestrator/example-orchestrator).
+
 ## Project layout
 
 ```
@@ -176,14 +209,14 @@ state checks are enabled, and access tokens are refreshed automatically.
 ├── pages/                     # Next.js routes (pages router)
 │   ├── _app.tsx               # providers, menu, auth wiring
 │   ├── index.tsx              # WfoStartPage
-│   ├── search.tsx
 │   ├── settings.tsx
 │   ├── subscriptions/         # list + detail
 │   ├── workflows/             # list, detail, "new"
 │   ├── tasks/                 # list, detail, "new"
 │   ├── metadata/              # products, product blocks, resource types, tasks, …
 │   └── api/
-│       └── auth/[...nextauth].ts   # NextAuth + OIDC provider
+│       ├── auth/[...nextauth].ts   # NextAuth + OIDC provider
+│       └── agent/[...path].ts     # AG-UI stream, history, form options, downloads
 ├── translations/              # en-GB / nl-NL message catalogs + provider
 ├── font/                      # Inter web font
 ├── public/                    # static assets (favicon, etc.)
