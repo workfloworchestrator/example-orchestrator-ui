@@ -20,3 +20,4 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - '@orchestrator-ui/orchestrator-agent-chat@0.2.2'
+  - '@orchestrator-ui/orchestrator-ui-components@12.1.0'

@@ -1,8 +1,4 @@
-import {
-    Environment,
-    OrchestratorConfig,
-    getEnvironmentVariables,
-} from '@orchestrator-ui/orchestrator-ui-components';
+import { Environment, OrchestratorConfig, getEnvironmentVariables } from '@orchestrator-ui/orchestrator-ui-components';
 
 export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
     const {
@@ -16,6 +12,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         USE_WEB_SOCKETS,
         WORKFLOW_INFORMATION_LINK_URL,
         SHOW_WORKFLOW_INFORMATION_LINK,
+        SHOW_BETA_WORKFLOW_LAYOUT_TOGGLE,
         OAUTH2_ACTIVE,
         ENABLE_SUPPORT_MENU_ITEM,
         SUPPORT_MENU_ITEM_URL,
@@ -35,6 +32,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
         'USE_WEB_SOCKETS',
         'WORKFLOW_INFORMATION_LINK_URL',
         'SHOW_WORKFLOW_INFORMATION_LINK',
+        'SHOW_BETA_WORKFLOW_LAYOUT_TOGGLE',
         'OAUTH2_ACTIVE',
         'ENABLE_SUPPORT_MENU_ITEM',
         'SUPPORT_MENU_ITEM_URL',
@@ -72,5 +70,7 @@ export const getInitialOrchestratorConfig = (): OrchestratorConfig => {
             SHOW_WORKFLOW_USER_GUIDE?.toLowerCase() === 'true',
         expandWorkflowUserGuideOnStart:
             EXPAND_WORKFLOW_USER_GUIDE_ON_START?.toLowerCase() === 'true',
+        showBetaWorkflowLayoutToggle:
+            SHOW_BETA_WORKFLOW_LAYOUT_TOGGLE?.toLowerCase() === 'true',
     };
 };
